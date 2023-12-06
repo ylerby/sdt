@@ -8,11 +8,12 @@ type Database struct {
 
 type DbInterface interface {
 	Connect() *Database
-	//DbRecordInterface
+	DbRecordInterface
 }
 
 type DbRecordInterface interface {
 	GetRecord()
+	CreateRecord()
 	UpdateRecord()
 	DeleteRecord()
 }
