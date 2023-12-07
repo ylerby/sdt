@@ -7,7 +7,7 @@ type Database struct {
 }
 
 type DbInterface interface {
-	Connect() *Database
+	Connect() error
 	DbRecordInterface
 }
 

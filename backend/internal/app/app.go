@@ -19,21 +19,31 @@ type App struct {
 func New(port string) *App {
 	return &App{
 		Server:   &http.Server{Addr: fmt.Sprintf(":%s", port)},
-		Database: sql.New().Connect(),
+		Database: sql.New(),
 	}
 }
 
 // StartApp - запуск http-сервера
 func (a *App) StartApp() {
+	log.Println("запуск приложения")
 
-	http.HandleFunc("/", a.MainPageHandler)
+	err := a.Database.Connect()
+	if err != nil {
+		log.Printf("ошибка при подключении к бд %s", err)
+	}
+
+	log.Println("успешное подключение к БД")
+
+	a.Database.GetRecord()
+
 	http.HandleFunc("/update", a.UpdateHandler)
 	http.HandleFunc("/create", a.CreateHandler)
 	http.HandleFunc("/delete", a.DeleteHandler)
+	http.HandleFunc("/all_records", a.GetAllRecords)
 
-	err := a.Server.ListenAndServe()
+	err = a.Server.ListenAndServe()
 	if err != nil {
-		log.Println(err)
+		log.Printf("ошибка при запуске сервера %s", err)
 		return
 	}
 }

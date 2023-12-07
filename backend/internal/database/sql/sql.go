@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"os"
 )
 
 func New() DbInterface {
@@ -12,20 +11,14 @@ func New() DbInterface {
 }
 
 // Connect - подключение к базе данных
-func (d *Database) Connect() *Database {
+func (d *Database) Connect() error {
+	var err error
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		os.Getenv("host"),
-		os.Getenv("user"),
-		os.Getenv("password"),
-		os.Getenv("name"),
-		os.Getenv("port"),
-	)
+	dsn := fmt.Sprintf("host=flora.db.elephantsql.com user=tjydarki password=dY8S4ONKcpB1Ul9p8RrH4smk-yiDmUzH dbname=tjydarki port=5432 sslmode=disable")
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	d.db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		return nil //, fmt.Errorf("ошибка при подключении к БД PostgreSQL %s", err)
+		return err
 	}
-
-	return &Database{db: db}
+	return nil
 }
