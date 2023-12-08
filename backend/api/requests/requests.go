@@ -1,17 +1,17 @@
 package requests
 
 type CreateEstateRequestBody struct {
-	AccommodationTypeId int     `json:"AccommodationTypeId"`
-	DealType            int     `json:"DealType"`
-	Floor               int     `json:"Floor"`
-	FloorsCount         int     `json:"FloorsCount"`
-	RoomsCount          int     `json:"RoomsCount"`
-	TotalMeters         float64 `json:"TotalMeters"`
-	District            string  `json:"District"`
-	Street              string  `json:"Street"`
-	HouseNumber         string  `json:"HouseNumber"`
-	ApartmentNumber     int     `json:"ApartmentNumber"`
-	Metro               string  `json:"Metro"`
+	Accommodation   int     `json:"Accommodation"`
+	DealType        int     `json:"DealType"`
+	Floor           int     `json:"Floor"`
+	FloorsCount     int     `json:"FloorsCount"`
+	RoomsCount      int     `json:"RoomsCount"`
+	TotalMeters     float64 `json:"TotalMeters"`
+	District        string  `json:"District"`
+	Street          string  `json:"Street"`
+	HouseNumber     string  `json:"HouseNumber"`
+	ApartmentNumber int     `json:"ApartmentNumber"`
+	Metro           string  `json:"Metro"`
 }
 
 type CreateTransactionBody struct {

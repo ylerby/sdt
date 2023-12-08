@@ -10,7 +10,7 @@ import (
 
 func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBody) {
 	currentRecordModel := model.RealEstate{
-		Accommodation:   requestBody.AccommodationTypeId,
+		Accommodation:   requestBody.Accommodation,
 		DealType:        requestBody.DealType,
 		Floor:           requestBody.Floor,
 		FloorsCount:     requestBody.FloorsCount,
