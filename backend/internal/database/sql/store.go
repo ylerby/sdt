@@ -1,6 +1,10 @@
 package sql
 
-import "gorm.io/gorm"
+import (
+	"backend/api/requests"
+	"backend/api/responses"
+	"gorm.io/gorm"
+)
 
 type Database struct {
 	db *gorm.DB
@@ -13,7 +17,10 @@ type DbInterface interface {
 
 type DbRecordInterface interface {
 	GetRecord()
-	CreateRecord()
+	GetAllRecords() []responses.GetAllRecordResult
+	CreateEstateRecord(requestBody requests.CreateEstateRequestBody)
+	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
 	UpdateRecord()
-	DeleteRecord()
+	DeleteEstateRecord(street, houseNumber string, apartmentNumber int)
+	DeleteTransactionRecord()
 }

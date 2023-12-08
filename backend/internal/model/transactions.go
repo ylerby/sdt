@@ -10,8 +10,8 @@ type Transactions struct {
 	TransactionID   int       `gorm:"primary key"`
 	Price           float64   `gorm:"price"`
 	TransactionDate time.Time `gorm:"transaction_date"`
-	//DealTypeID      DealType   `gorm:"foreignKey:DealTypeID"`
-	RealEstates RealEstate `gorm:"foreignKey:RealEstateID"`
-	Agents      Agents     `gorm:"foreignKey:AgentID"`
-	Clients     Clients    `gorm:"foreignKey:ClientID"`
+	DealTypeID      int       `gorm:"foreignKey:DealTypeID"`
+	RealEstates     int       `gorm:"foreignKey:RealEstateID"`
+	Agents          int       `gorm:"foreignKey:AgentID"`
+	Clients         int       `gorm:"foreignKey:ClientID"`
 }

@@ -11,8 +11,7 @@ import (
 
 type App struct {
 	Database sql.DbInterface
-	//Cache    cache.ClientInterface
-	Server *http.Server
+	Server   *http.Server
 }
 
 // New - создание приложения
@@ -34,12 +33,10 @@ func (a *App) StartApp() {
 
 	log.Println("успешное подключение к БД")
 
-	a.Database.GetRecord()
-
 	http.HandleFunc("/update", a.UpdateHandler)
-	http.HandleFunc("/create", a.CreateHandler)
+	http.HandleFunc("/create", a.CreateEstateHandler)
 	http.HandleFunc("/delete", a.DeleteHandler)
-	http.HandleFunc("/all_records", a.GetAllRecords)
+	http.HandleFunc("/", a.GetAllRecords)
 
 	err = a.Server.ListenAndServe()
 	if err != nil {
