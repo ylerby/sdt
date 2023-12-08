@@ -1,6 +1,6 @@
 # Лабораторная работа по теории разработки программного обеспечения
 
-### frontend:
+### Для запуска frontend`a необходимо:
 
 ```
 cd frontend
@@ -10,7 +10,7 @@ npm start
 link: http://localhost:3000
 ```
 
-### Для запуска необходимо:
+### Для запуска backend`a необходимо:
 
 - Выполнить команду:
   ```
@@ -58,17 +58,19 @@ link: http://localhost:3000
 
 #### Формат запроса:
 
-##### Form Value:
-
-- street (string)
-- house_number (string)
-- apartment_number (int)
+```json
+{
+    "Street":"Ленинградский проспект",
+    "HouseNumber":"вл8",
+    "ApartmentNumber":433
+}
+```
 
 #### Формат ответа:
 
 ```json
 {
-  "Data": "успешное удаление записи",
+  "Data": "Запись успешно удалена",
   "ResponseError": ""
 }
 ```
