@@ -1,6 +1,7 @@
 package app
 
 import (
+	"backend/api/schemas"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -14,7 +15,16 @@ func (a *App) GetAllRecords(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Ошибка при сериализации %s", err)
 	}
 
-	_, err = w.Write(response)
+	res, err := json.Marshal(schemas.Response{
+		Data:          response,
+		ResponseError: "",
+	})
+
+	if err != nil {
+		log.Printf("Ошибка при сериализации %s", err)
+	}
+
+	_, err = w.Write(res)
 	if err != nil {
 		log.Printf("Ошибка при записи %s", err)
 	}
