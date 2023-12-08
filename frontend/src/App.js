@@ -181,13 +181,17 @@ const AppInner = () => {
           fetch("/delete/estate", {
             method: "DELETE",
             body: JSON.stringify({ Street, HouseNumber, ApartmentNumber }),
-          }).catch((res) =>
-            toaster.add({
-              content: res?.ResponseError,
-              type: "error",
-              autoHiding: 2000,
+          })
+            .then(() => {
+              getElements((res) => setData(res.Data));
             })
-          );
+            .catch((res) =>
+              toaster.add({
+                content: res?.ResponseError,
+                type: "error",
+                autoHiding: 2000,
+              })
+            );
         },
         theme: "danger",
       },
