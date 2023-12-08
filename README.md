@@ -58,17 +58,17 @@
 #### Формат запроса:
 ```json
 {
-    "accommodation_type_id" : 0,
-    "deal_type_id" : 1,
-    "floor" : 6,
-    "floors_count" : 12,
-    "rooms_count" : 2,
-    "total_meters" : 43.3,
-    "district" : "Nahabino",
-    "street" : "Yasnaya",
-    "house_number" : "21k1",
-    "apartment_number" : 12,
-    "metro" : "MCD Nahabino"
+    "AccommodationTypeId" : 0,
+    "DealTypeId" : 1,
+    "Floor" : 6,
+    "FloorsCount" : 12,
+    "RoomsCount" : 2,
+    "TotalMeters" : 43.3,
+    "District" : "Nahabino",
+    "Street" : "Yasnaya",
+    "HouseNumber" : "21k1",
+    "ApartmentNumber" : 12,
+    "Metro" : "MCD Nahabino"
 }
 ```
 
