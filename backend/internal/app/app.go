@@ -34,9 +34,9 @@ func (a *App) StartApp() {
 	log.Println("успешное подключение к БД")
 
 	http.HandleFunc("/update", a.UpdateHandler)
-	http.HandleFunc("/create", a.CreateEstateHandler)
-	http.HandleFunc("/delete", a.DeleteHandler)
-	http.HandleFunc("/", a.GetAllRecords)
+	http.HandleFunc("/create/estate", a.CreateEstateHandler)
+	http.HandleFunc("/delete/estate", a.DeleteEstateHandler)
+	http.HandleFunc("/get", a.GetAllRecords)
 
 	err = a.Server.ListenAndServe()
 	if err != nil {
