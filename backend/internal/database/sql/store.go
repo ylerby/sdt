@@ -21,6 +21,6 @@ type DbRecordInterface interface {
 	CreateEstateRecord(requestBody requests.CreateEstateRequestBody)
 	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
 	UpdateRecord()
-	DeleteEstateRecord(street, houseNumber string, apartmentNumber int)
+	DeleteEstateRecord(street, houseNumber string, apartmentNumber int) bool
 	DeleteTransactionRecord()
 }

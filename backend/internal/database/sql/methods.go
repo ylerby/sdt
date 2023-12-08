@@ -10,6 +10,8 @@ import (
 
 func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBody) {
 	currentRecordModel := model.RealEstate{
+		/// fixme : РЕШИТЬ ВОПРОС С ID
+		RealEstateID:    len(d.GetAllRecords()) + 1000,
 		Accommodation:   requestBody.Accommodation,
 		DealType:        requestBody.DealType,
 		Floor:           requestBody.Floor,
@@ -40,7 +42,7 @@ func (d *Database) CreateTransactionRecord(requestBody requests.CreateTransactio
 	d.db.Create(&currentRecordModel)
 }
 
-func (d *Database) DeleteEstateRecord(street, houseNumber string, apartmentNumber int) {
+func (d *Database) DeleteEstateRecord(street, houseNumber string, apartmentNumber int) bool {
 	var deletedValue model.RealEstate
 	//todo: сделать проверку на существование элемента !
 	d.db.Raw(fmt.Sprintf(`SELECT * FROM real_estates `+
@@ -49,7 +51,9 @@ func (d *Database) DeleteEstateRecord(street, houseNumber string, apartmentNumbe
 		` WHERE real_estates.street = '%s' AND real_estates.house_number = '%s' `+
 		` AND real_estates.apartment_number = %d`+
 		` LIMIT 1`, street, houseNumber, apartmentNumber)).Scan(&deletedValue)
+
 	d.db.Delete(&deletedValue)
+	return true
 }
 
 func (d *Database) UpdateRecord() {

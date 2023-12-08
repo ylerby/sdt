@@ -7,7 +7,7 @@ import (
 
 type RealEstate struct {
 	gorm.Model
-	RealEstateID    int       `gorm:"primary key;real_estate_id"`
+	RealEstateID    int       `gorm:"primary key;column:id;autoIncrement"`
 	PublicationDate time.Time `gorm:"publication_date"`
 	DealType        int       `gorm:"column:deal_type_id;foreignKey:DealTypeID"`
 	Accommodation   int       `gorm:"column:accommodation_type_id;foreignKey:AccommodationTypeID"`

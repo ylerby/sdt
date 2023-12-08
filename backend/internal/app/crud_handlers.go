@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 func (a *App) CreateEstateHandler(w http.ResponseWriter, r *http.Request) {
@@ -56,11 +55,20 @@ func (a *App) DeleteEstateHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	intApartmentNumber, err := strconv.Atoi(currentRequestBody.ApartmentNumber)
-	if err != nil {
-		log.Printf("Ошибка при конвертации числа %s", err)
-		return
-	}
+	isDeleted := a.Database.DeleteEstateRecord(currentRequestBody.Street, currentRequestBody.HouseNumber, currentRequestBody.ApartmentNumber)
+	if isDeleted {
+		res, err := json.Marshal(schemas.Response{
+			Data:          "Запись успешно удалена",
+			ResponseError: "",
+		})
+		if err != nil {
+			log.Printf("Ошибка при сериализации %s", err)
+			return
+		}
 
-	a.Database.DeleteEstateRecord(currentRequestBody.Street, currentRequestBody.HouseNumber, intApartmentNumber)
+		_, err = w.Write(res)
+		if err != nil {
+			log.Printf("Ошибка при записи %s", err)
+		}
+	}
 }
