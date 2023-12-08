@@ -184,6 +184,11 @@ const AppInner = () => {
           })
             .then(() => {
               getElements((res) => setData(res.Data));
+              toaster.add({
+                content: "Объявление удалено",
+                type: "success",
+                autoHiding: 2000,
+              });
             })
             .catch((res) =>
               toaster.add({
@@ -266,6 +271,12 @@ const AppInner = () => {
     })
       .then(() => {
         getElements((res) => setData(res.Data));
+        toaster.add({
+          content: "Объявление создано",
+          type: "success",
+          autoHiding: 2000,
+        });
+        setIsDialogOpen(false);
       })
       .catch((res) =>
         toaster.add({
