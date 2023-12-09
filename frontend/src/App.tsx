@@ -287,7 +287,7 @@ const AppInner = () => {
     } else {
       fetch("/update/estate", {
         method: "PUT",
-        body: JSON.stringify({ ...body, RealEstateID: editRealStateId }),
+        body: JSON.stringify({ ...body, ID: editRealStateId }),
       })
         .then(() => {
           getElements((res) => setFilteredData(res.Data));
