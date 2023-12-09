@@ -28,12 +28,12 @@ func (a *App) StartApp() {
 
 	err := a.Database.Connect()
 	if err != nil {
-		log.Printf("ошибка при подключении к бд %s", err)
+		log.Fatalf("ошибка при подключении к бд %s", err)
 	}
 
 	log.Println("успешное подключение к БД")
 
-	http.HandleFunc("/update", a.UpdateHandler)
+	http.HandleFunc("/update/estate", a.UpdateHandler)
 	http.HandleFunc("/create/estate", a.CreateEstateHandler)
 	http.HandleFunc("/delete/estate", a.DeleteEstateHandler)
 	http.HandleFunc("/get", a.GetAllRecords)

@@ -11,7 +11,7 @@ import (
 func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBody) {
 	currentRecordModel := model.RealEstate{
 		/// fixme : РЕШИТЬ ВОПРОС С ID
-		RealEstateID:    len(d.GetAllRecords()) + 1000,
+		RealEstateID:    len(d.GetAllRecords()) + 1,
 		Accommodation:   requestBody.Accommodation,
 		DealType:        requestBody.DealType,
 		Floor:           requestBody.Floor,

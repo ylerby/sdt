@@ -27,3 +27,17 @@ type DeleteEstateRequestBody struct {
 	HouseNumber     string `json:"HouseNumber"`
 	ApartmentNumber int    `json:"ApartmentNumber"`
 }
+
+type UpdateEstateRequestBody struct {
+	Accommodation   interface{} `json:"Accommodation"`
+	DealType        interface{} `json:"DealType"`
+	Floor           int         `json:"Floor"`
+	FloorsCount     int         `json:"FloorsCount"`
+	RoomsCount      int         `json:"RoomsCount"`
+	TotalMeters     float64     `json:"TotalMeters"`
+	District        string      `json:"District"`
+	Street          string      `json:"Street"`
+	HouseNumber     string      `json:"HouseNumber"`
+	ApartmentNumber int         `json:"ApartmentNumber"`
+	Metro           string      `json:"Metro"`
+}
