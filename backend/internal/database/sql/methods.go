@@ -10,7 +10,6 @@ import (
 
 func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBody) {
 	currentRecordModel := model.RealEstate{
-		/// fixme : РЕШИТЬ ВОПРОС С ID
 		RealEstateID:    len(d.GetAllRecords()) + 1,
 		Accommodation:   requestBody.Accommodation,
 		DealType:        requestBody.DealType,
@@ -56,23 +55,21 @@ func (d *Database) DeleteEstateRecord(street, houseNumber string, apartmentNumbe
 	return true
 }
 
-//todo: решить, отправляем ли цену
-
-func (d *Database) UpdateRecord(requestBody requests.UpdateEstateRequestBody) {
-	d.db.Raw(fmt.Sprintf("UPDATE real_estates"+
-		"SET "+
-		"deal_type_id = '%d'"+
-		"accommodation_type_id = '%d'"+
-		"floor = '%d'"+
-		"floors_count = '%d'"+
-		"rooms_count = '%d'"+
-		"total_meters = '%f'"+
-		"district = '%s'"+
-		"street = '%s'"+
-		"house_number = '%s'"+
-		"apartment_number = '%d'"+
-		"metro = '%s'"+
-		"WHERE id = '%d'",
+func (d *Database) UpdateEstateRecord(requestBody requests.UpdateEstateRequestBody) {
+	d.db.Exec(fmt.Sprintf(`UPDATE real_estates`+
+		" SET "+
+		" deal_type_id = %d,"+
+		" accommodation_type_id = %d,"+
+		" floor = %d,"+
+		" floors_count = %d,"+
+		" rooms_count = %d,"+
+		" total_meters = %f,"+
+		" district = '%s',"+
+		" street = '%s',"+
+		" house_number = '%s',"+
+		" apartment_number = %d,"+
+		" metro = '%s'"+
+		" WHERE id = %d",
 		requestBody.DealType, requestBody.Accommodation, requestBody.Floor,
 		requestBody.FloorsCount, requestBody.RoomsCount, requestBody.TotalMeters,
 		requestBody.District, requestBody.Street, requestBody.HouseNumber,

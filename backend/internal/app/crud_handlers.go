@@ -23,7 +23,7 @@ func (a *App) CreateEstateHandler(w http.ResponseWriter, r *http.Request) {
 
 		_, err = w.Write(res)
 		if err != nil {
-			log.Printf("Ошибка при записи %s", err)
+			log.Printf("Ошибка при ответе %s", err)
 			return
 		}
 	}
@@ -31,7 +31,7 @@ func (a *App) CreateEstateHandler(w http.ResponseWriter, r *http.Request) {
 	a.Database.CreateEstateRecord(currentRequestBody)
 }
 
-func (a *App) UpdateHandler(w http.ResponseWriter, r *http.Request) {
+func (a *App) UpdateEstateHandler(w http.ResponseWriter, r *http.Request) {
 	var currentRequestBody requests.UpdateEstateRequestBody
 	err := json.NewDecoder(r.Body).Decode(&currentRequestBody)
 	if err != nil {
@@ -47,12 +47,21 @@ func (a *App) UpdateHandler(w http.ResponseWriter, r *http.Request) {
 
 		_, err = w.Write(res)
 		if err != nil {
-			log.Printf("Ошибка при записи %s", err)
+			log.Printf("Ошибка при ответе %s", err)
 			return
 		}
 	}
 
-	a.Database.UpdateRecord(currentRequestBody)
+	a.Database.UpdateEstateRecord(currentRequestBody)
+	res, err := json.Marshal(schemas.Response{
+		Data:          "Запись успешно обновлена",
+		ResponseError: "",
+	})
+
+	_, err = w.Write(res)
+	if err != nil {
+		log.Printf("Ошибка при ответе %s", err)
+	}
 }
 
 func (a *App) DeleteEstateHandler(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +79,7 @@ func (a *App) DeleteEstateHandler(w http.ResponseWriter, r *http.Request) {
 
 		_, err = w.Write(res)
 		if err != nil {
-			log.Printf("Ошибка при записи %s", err)
+			log.Printf("Ошибка при ответе %s", err)
 			return
 		}
 	}
@@ -88,7 +97,7 @@ func (a *App) DeleteEstateHandler(w http.ResponseWriter, r *http.Request) {
 
 		_, err = w.Write(res)
 		if err != nil {
-			log.Printf("Ошибка при записи %s", err)
+			log.Printf("Ошибка при ответе %s", err)
 		}
 	}
 }

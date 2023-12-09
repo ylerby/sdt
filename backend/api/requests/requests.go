@@ -30,7 +30,7 @@ type DeleteEstateRequestBody struct {
 }
 
 type UpdateEstateRequestBody struct {
-	ID              int     `json:""`
+	ID              int     `json:"ID"`
 	Accommodation   int     `json:"Accommodation"`
 	DealType        int     `json:"DealType"`
 	Floor           int     `json:"Floor"`
