@@ -37,47 +37,59 @@ const map = {
 
 const COLUMNS = [
   {
+    id: "Accommodation",
+    name: "Тип недвижимости",
+    template: (val) => map["Accommodation"][val.Accommodation],
+  },
+  {
+    name: "Номер квартиры",
     id: "ApartmentNumber",
   },
   {
+    name: "Тип сделки",
     id: "DealType",
-    template: (val) => map["DealType"][val],
+    template: (val) => {
+      return map["DealType"][val.DealType];
+    },
   },
   {
-    id: "Accommodation",
-    template: (val) => map["Accommodation"][val],
-  },
-  {
+    name: "Район",
     id: "District",
   },
   {
+    name: "Этаж",
     id: "Floor",
   },
   {
+    name: "Этажей в доме",
     id: "FloorsCount",
   },
   {
+    name: "Номер дома",
     id: "HouseNumber",
   },
   {
+    name: "Станция метро",
     id: "Metro",
   },
   {
+    name: "Цена",
     id: "Price",
   },
   {
+    name: "Дата публикации",
     id: "PublicationDate",
   },
   {
-    id: "RealEstateID",
-  },
-  {
+    name: "Число комнат",
     id: "RoomsCount",
   },
   {
+    name: "Улица",
     id: "Street",
   },
   {
+    name: "Площадь",
     id: "TotalMeters",
   },
 ];
@@ -220,10 +232,21 @@ const AppInner = () => {
       .fill({})
       .map((val, ind) => ({ val: "", id: CREATE_COLUMNS[ind].id }))
   );
+  const resetDraft = () => {
+    setDraft(
+      new Array(CREATE_COLUMNS.length)
+        .fill({})
+        .map((val, ind) => ({ val: "", id: CREATE_COLUMNS[ind].id }))
+    );
+  };
   const onChangeDraft = (event) => {
-    const value = event.target.value;
+    let value = event.target.value;
     const id = event.target.id;
     const index = draft.findIndex((el) => el.id === id);
+
+    if (!Object.is(parseInt(value), NaN)) {
+      value = parseInt(value);
+    }
 
     if (index !== -1) {
       const updatedDraft = [...draft];
@@ -252,6 +275,25 @@ const AppInner = () => {
   };
 
   const onCreate = () => {
+    const negativeFields = [];
+    draft.forEach((el) => {
+      if (typeof el.val === "number") {
+        negativeFields.push(getName(el.id));
+      }
+    });
+    if (negativeFields.length) {
+      toaster.add({
+        content: `Поля: ${negativeFields.join(
+          ", "
+        )} не могут быть отрицательными`,
+        type: "error",
+        autoHiding: 2000,
+      });
+      return;
+    }
+
+    console.log(draft, negativeFields);
+
     if (draft.some((el) => String(el.val).length === 0)) {
       toaster.add({
         content: "Все поля должны быть заполнены",
@@ -260,31 +302,33 @@ const AppInner = () => {
       });
       return;
     }
+
     const body = {};
     draft.forEach((el) => {
       body[el.id] = el.val;
     });
 
-    fetch("/create/estate", {
-      method: "POST",
-      body: JSON.stringify(body),
-    })
-      .then(() => {
-        getElements((res) => setData(res.Data));
-        toaster.add({
-          content: "Объявление создано",
-          type: "success",
-          autoHiding: 2000,
-        });
-        setIsDialogOpen(false);
-      })
-      .catch((res) =>
-        toaster.add({
-          content: res?.ResponseError,
-          type: "error",
-          autoHiding: 2000,
-        })
-      );
+    // fetch("/create/estate", {
+    //   method: "POST",
+    //   body: JSON.stringify(body),
+    // })
+    //   .then(() => {
+    //     getElements((res) => setData(res.Data));
+    //     toaster.add({
+    //       content: "Объявление создано",
+    //       type: "success",
+    //       autoHiding: 2000,
+    //     });
+    //     setIsDialogOpen(false);
+    //     resetDraft();
+    //   })
+    //   .catch((res) =>
+    //     toaster.add({
+    //       content: res?.ResponseError,
+    //       type: "error",
+    //       autoHiding: 2000,
+    //     })
+    //   );
   };
 
   const DealType_OPTIONS = Object.values(map.DealType).map((type) => ({
@@ -294,6 +338,16 @@ const AppInner = () => {
   const Accommodation_OPTIONS = Object.values(map.Accommodation).map(
     (type) => ({ value: type, content: type })
   );
+
+  const getName = (id) => {
+    const column = COLUMNS.find((column) => column.id === id);
+
+    if (!column) {
+      console.log(id);
+      return "";
+    }
+    return column.name;
+  };
 
   return (
     <ThemeProvider>
@@ -306,13 +360,25 @@ const AppInner = () => {
               value={textFilter}
               onUpdate={onTextFilterUpdate}
             />
+            <Select
+              size={ACTION_SIZE}
+              placeholder={getName("Accommodation")}
+              options={Accommodation_OPTIONS}
+              onUpdate={(values) => onUpdateSelect(values, "Accommodation")}
+            />
+            <Select
+              size={ACTION_SIZE}
+              placeholder={getName("DealType")}
+              options={DealType_OPTIONS}
+              onUpdate={(values) => onUpdateSelect(values, "DealType")}
+            />
             <Button view="action" size={ACTION_SIZE} onClick={onDialogOpen}>
               Создать объявление
             </Button>
           </Flex>
           <Table
             className="app__table"
-            data={data}
+            data={data.slice().reverse()}
             columns={COLUMNS}
             getRowActions={getRowActions}
           />
@@ -329,70 +395,69 @@ const AppInner = () => {
                 <Text variant="header-1">Создание объявления</Text>
               </Flex>
               <Select
-                placeholder="Accommodation"
+                placeholder={getName("Accommodation")}
                 options={Accommodation_OPTIONS}
                 onUpdate={(values) => onUpdateSelect(values, "Accommodation")}
               />
               <Select
-                placeholder="DealType"
+                placeholder={getName("DealType")}
                 options={DealType_OPTIONS}
                 onUpdate={(values) => onUpdateSelect(values, "DealType")}
               />
               <TextInput
-                placeholder="ApartmentNumber"
+                placeholder={getName("ApartmentNumber")}
                 id="ApartmentNumber"
                 value={getValue("ApartmentNumber")}
                 onChange={onChangeDraft}
                 type="number"
               />
               <TextInput
-                placeholder="District"
+                placeholder={getName("District")}
                 id="District"
                 value={getValue("District")}
                 onChange={onChangeDraft}
               />
               <TextInput
-                placeholder="Floor"
+                placeholder={getName("Floor")}
                 id="Floor"
                 value={getValue("Floor")}
                 onChange={onChangeDraft}
                 type="number"
               />
               <TextInput
-                placeholder="FloorsCount"
+                placeholder={getName("FloorsCount")}
                 id="FloorsCount"
                 value={getValue("FloorsCount")}
                 onChange={onChangeDraft}
                 type="number"
               />
               <TextInput
-                placeholder="HouseNumber"
+                placeholder={getName("HouseNumber")}
                 id="HouseNumber"
                 value={getValue("HouseNumber")}
                 onChange={onChangeDraft}
-                type="number"
               />
               <TextInput
-                placeholder="Metro"
+                placeholder={getName("Metro")}
                 id="Metro"
                 value={getValue("Metro")}
                 onChange={onChangeDraft}
               />
               <TextInput
-                placeholder="RoomsCount"
+                placeholder={getName("RoomsCount")}
                 id="RoomsCount"
                 value={getValue("RoomsCount")}
                 onChange={onChangeDraft}
                 type="number"
               />
               <TextInput
-                placeholder="Street"
+                placeholder={getName("Street")}
                 id="Street"
                 value={getValue("Street")}
                 onChange={onChangeDraft}
               />
               <TextInput
-                placeholder="TotalMeters"
+                placeholder={getName("TotalMeters")}
                 id="TotalMeters"
                 value={getValue("TotalMeters")}
                 onChange={onChangeDraft}
