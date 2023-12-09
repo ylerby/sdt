@@ -7,7 +7,8 @@ import (
 )
 
 type Database struct {
-	db *gorm.DB
+	db      *gorm.DB
+	Mapping map[string]map[int]string
 }
 
 type DbInterface interface {
@@ -21,6 +22,6 @@ type DbRecordInterface interface {
 	CreateEstateRecord(requestBody requests.CreateEstateRequestBody)
 	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
 	UpdateEstateRecord(requestBody requests.UpdateEstateRequestBody)
-	DeleteEstateRecord(street, houseNumber string, apartmentNumber int) bool
+	DeleteEstateRecord(id int) bool
 	DeleteTransactionRecord()
 }

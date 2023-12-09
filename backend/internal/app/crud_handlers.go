@@ -84,7 +84,7 @@ func (a *App) DeleteEstateHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	isDeleted := a.Database.DeleteEstateRecord(currentRequestBody.Street, currentRequestBody.HouseNumber, currentRequestBody.ApartmentNumber)
+	isDeleted := a.Database.DeleteEstateRecord(currentRequestBody.ID)
 	if isDeleted {
 		res, err := json.Marshal(schemas.Response{
 			Data:          "Запись успешно удалена",

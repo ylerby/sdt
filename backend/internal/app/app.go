@@ -12,6 +12,7 @@ import (
 type App struct {
 	Database sql.DbInterface
 	Server   *http.Server
+	Mapping  map[string]map[int]string
 }
 
 // New - создание приложения
@@ -33,7 +34,7 @@ func (a *App) StartApp() {
 
 	log.Println("успешное подключение к БД")
 
-	http.HandleFunc("/update/estate", a.UpdateHandler)
+	http.HandleFunc("/update/estate", a.UpdateEstateHandler)
 	http.HandleFunc("/create/estate", a.CreateEstateHandler)
 	http.HandleFunc("/delete/estate", a.DeleteEstateHandler)
 	http.HandleFunc("/get", a.GetAllRecords)

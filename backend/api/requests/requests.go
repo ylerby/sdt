@@ -24,9 +24,7 @@ type CreateTransactionBody struct {
 }
 
 type DeleteEstateRequestBody struct {
-	Street          string `json:"Street"`
-	HouseNumber     string `json:"HouseNumber"`
-	ApartmentNumber int    `json:"ApartmentNumber"`
+	ID int `json:"id"`
 }
 
 type UpdateEstateRequestBody struct {

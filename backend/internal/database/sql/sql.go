@@ -7,7 +7,21 @@ import (
 )
 
 func New() DbInterface {
-	return &Database{}
+	return &Database{
+		Mapping: map[string]map[int]string{
+			"DealType": {
+				0: "Купли-продажа",
+				1: "Аренда",
+			},
+			"AccommodationType": {
+				0: "Квартира",
+				1: "Частный дом",
+				2: "Таун-хаус",
+				3: "Аппартаменты",
+				4: "Комната",
+			},
+		},
+	}
 }
 
 // Connect - подключение к базе данных

@@ -9,7 +9,7 @@ import (
 )
 
 func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBody) {
-	currentRecordModel := model.RealEstate{
+	currentEstateModel := model.RealEstate{
 		RealEstateID:    len(d.GetAllRecords()) + 1,
 		Accommodation:   requestBody.Accommodation,
 		DealType:        requestBody.DealType,
@@ -25,7 +25,8 @@ func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBo
 		PublicationDate: time.Now(),
 	}
 
-	d.db.Create(&currentRecordModel)
+	d.db.Create(&currentEstateModel)
+
 }
 
 func (d *Database) CreateTransactionRecord(requestBody requests.CreateTransactionBody) {
@@ -41,17 +42,10 @@ func (d *Database) CreateTransactionRecord(requestBody requests.CreateTransactio
 	d.db.Create(&currentRecordModel)
 }
 
-func (d *Database) DeleteEstateRecord(street, houseNumber string, apartmentNumber int) bool {
-	var deletedValue model.RealEstate
-	//todo: сделать проверку на существование элемента !
-	d.db.Raw(fmt.Sprintf(`SELECT * FROM real_estates `+
-		` LEFT JOIN deal_types ON real_estates.deal_type_id = deal_types.deal_type_id`+
-		` LEFT JOIN accommodation_types ON real_estates.accommodation_type_id = accommodation_types.accommodation_type_id`+
-		` WHERE real_estates.street = '%s' AND real_estates.house_number = '%s' `+
-		` AND real_estates.apartment_number = %d`+
-		` LIMIT 1`, street, houseNumber, apartmentNumber)).Scan(&deletedValue)
-
-	d.db.Delete(&deletedValue)
+func (d *Database) DeleteEstateRecord(id int) bool {
+	//todo: сделать проверку на существование элемента
+	d.db.Exec(fmt.Sprintf("DELETE FROM real_estates "+
+		"WHERE id = %d", id))
 	return true
 }
 
