@@ -20,7 +20,7 @@ type DbRecordInterface interface {
 	GetAllRecords() []responses.GetAllRecordResult
 	CreateEstateRecord(requestBody requests.CreateEstateRequestBody)
 	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
-	UpdateRecord()
+	UpdateRecord(requestBody requests.UpdateEstateRequestBody)
 	DeleteEstateRecord(street, houseNumber string, apartmentNumber int) bool
 	DeleteTransactionRecord()
 }

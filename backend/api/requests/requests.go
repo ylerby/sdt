@@ -29,8 +29,8 @@ type DeleteEstateRequestBody struct {
 }
 
 type UpdateEstateRequestBody struct {
-	Accommodation   interface{} `json:"Accommodation"`
-	DealType        interface{} `json:"DealType"`
+	Accommodation   int 		`json:"Accommodation"`
+	DealType        int 		`json:"DealType"`
 	Floor           int         `json:"Floor"`
 	FloorsCount     int         `json:"FloorsCount"`
 	RoomsCount      int         `json:"RoomsCount"`

@@ -56,7 +56,7 @@ func (d *Database) DeleteEstateRecord(street, houseNumber string, apartmentNumbe
 	return true
 }
 
-func (d *Database) UpdateRecord() {
+func (d *Database) UpdateRecord(requestBody requests.UpdateEstateRequestBody) {
 
 }
 
