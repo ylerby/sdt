@@ -8,9 +8,18 @@ import (
 	"time"
 )
 
+func (d *Database) GetEstateRecords() []responses.GetAllRecordResult {
+	var result []responses.GetAllRecordResult
+	d.db.Raw(`SELECT * FROM real_estates ` +
+		`LEFT JOIN deal_types ON real_estates.deal_type_id = deal_types.deal_type_id ` +
+		`LEFT JOIN accommodation_types ON ` +
+		`real_estates.accommodation_type_id = accommodation_types.accommodation_type_id`).Scan(&result)
+	return result
+}
+
 func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBody) {
 	currentEstateModel := model.RealEstate{
-		RealEstateID:    len(d.GetAllRecords()) + 1,
+		RealEstateID:    len(d.GetEstateRecords()) + 1,
 		Accommodation:   requestBody.Accommodation,
 		DealType:        requestBody.DealType,
 		Floor:           requestBody.Floor,
@@ -29,25 +38,9 @@ func (d *Database) CreateEstateRecord(requestBody requests.CreateEstateRequestBo
 
 }
 
-func (d *Database) CreateTransactionRecord(requestBody requests.CreateTransactionBody) {
-	currentRecordModel := model.Transactions{
-		Price:           requestBody.Price,
-		TransactionDate: time.Now(),
-		DealTypeID:      requestBody.DealType,
-		RealEstates:     requestBody.RealEstates,
-		Agents:          requestBody.Agents,
-		Clients:         requestBody.Clients,
-	}
-
-	d.db.Create(&currentRecordModel)
-}
-
-func (d *Database) DeleteEstateRecord(id int) bool {
-	//todo: сделать проверку на существование элемента
-
+func (d *Database) DeleteEstateRecord(id int) {
 	d.db.Exec(fmt.Sprintf("WITH deleted_transactions AS "+
 		" (DELETE FROM transactions    WHERE real_estate_id = %d    RETURNING * ) DELETE FROM real_estates WHERE id = %d", id, id))
-	return true
 }
 
 func (d *Database) UpdateEstateRecord(requestBody requests.UpdateEstateRequestBody) {
@@ -72,21 +65,4 @@ func (d *Database) UpdateEstateRecord(requestBody requests.UpdateEstateRequestBo
 		requestBody.ApartmentNumber, requestBody.Metro, requestBody.Price,
 		requestBody.ID,
 	))
-}
-
-func (d *Database) GetRecord() {
-
-}
-
-func (d *Database) GetAllRecords() []responses.GetAllRecordResult {
-	var result []responses.GetAllRecordResult
-	d.db.Raw(`SELECT * FROM real_estates ` +
-		`LEFT JOIN deal_types ON real_estates.deal_type_id = deal_types.deal_type_id ` +
-		`LEFT JOIN accommodation_types ON ` +
-		`real_estates.accommodation_type_id = accommodation_types.accommodation_type_id`).Scan(&result)
-	return result
-}
-
-func (d *Database) DeleteTransactionRecord() {
-
 }

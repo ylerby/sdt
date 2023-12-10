@@ -8,7 +8,7 @@ import (
 )
 
 func (a *App) GetAllRecords(w http.ResponseWriter, r *http.Request) {
-	result := a.Database.GetAllRecords()
+	result := a.Database.GetEstateRecords()
 
 	res, err := json.Marshal(schemas.Response{
 		Data:          result,

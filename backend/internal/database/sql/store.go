@@ -7,21 +7,25 @@ import (
 )
 
 type Database struct {
-	db      *gorm.DB
-	Mapping map[string]map[int]string
+	db *gorm.DB
 }
 
 type DbInterface interface {
 	Connect() error
-	DbRecordInterface
+	DbEstateInterface
+	DbTransactionInterface
 }
 
-type DbRecordInterface interface {
-	GetRecord()
-	GetAllRecords() []responses.GetAllRecordResult
+type DbEstateInterface interface {
+	GetEstateRecords() []responses.GetAllRecordResult
 	CreateEstateRecord(requestBody requests.CreateEstateRequestBody)
-	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
 	UpdateEstateRecord(requestBody requests.UpdateEstateRequestBody)
-	DeleteEstateRecord(id int) bool
+	DeleteEstateRecord(id int)
+}
+
+type DbTransactionInterface interface {
+	GetTransactionRecords()
+	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
+	UpdateTransactionRecord()
 	DeleteTransactionRecord()
 }

@@ -37,7 +37,7 @@ func (a *App) StartApp() {
 	http.HandleFunc("/update/estate", a.UpdateEstateHandler)
 	http.HandleFunc("/create/estate", a.CreateEstateHandler)
 	http.HandleFunc("/delete/estate", a.DeleteEstateHandler)
-	http.HandleFunc("/get", a.GetAllRecords)
+	http.HandleFunc("/get/estate", a.GetAllRecords)
 
 	err = a.Server.ListenAndServe()
 	if err != nil {

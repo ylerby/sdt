@@ -80,7 +80,7 @@ const AppInner = ({ path: mode }: { path: Path }) => {
   );
 
   const getElements = useCallback((callback: (res: GetResponse) => void) => {
-    fetch("/get", { method: "GET" })
+    fetch("/get/estate", { method: "GET" })
       .then((res) => res.json())
       .then((res) => {
         callback(res);

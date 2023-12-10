@@ -84,20 +84,18 @@ func (a *App) DeleteEstateHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	isDeleted := a.Database.DeleteEstateRecord(currentRequestBody.ID)
-	if isDeleted {
-		res, err := json.Marshal(schemas.Response{
-			Data:          "Запись успешно удалена",
-			ResponseError: "",
-		})
-		if err != nil {
-			log.Printf("Ошибка при сериализации %s", err)
-			return
-		}
+	a.Database.DeleteEstateRecord(currentRequestBody.ID)
+	res, err := json.Marshal(schemas.Response{
+		Data:          "Запись успешно удалена",
+		ResponseError: "",
+	})
+	if err != nil {
+		log.Printf("Ошибка при сериализации %s", err)
+		return
+	}
 
-		_, err = w.Write(res)
-		if err != nil {
-			log.Printf("Ошибка при ответе %s", err)
-		}
+	_, err = w.Write(res)
+	if err != nil {
+		log.Printf("Ошибка при ответе %s", err)
 	}
 }
