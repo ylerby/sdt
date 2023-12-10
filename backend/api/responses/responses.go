@@ -9,5 +9,5 @@ type GetEstateRecordsResult struct {
 }
 
 type GetTransactionRecordsResult struct {
-	model.Transactions
+	model.TransactionResponse
 }

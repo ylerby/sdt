@@ -13,7 +13,7 @@ func (d *Database) GetTransactionRecords() []responses.GetTransactionRecordsResu
 		"t.price AS transaction_price, t.transaction_date, " +
 		"CONCAT(c.first_name, ' ', c.patronymic, ' ', c.last_name) AS client_full_name, " +
 		"CONCAT(a.first_name, ' ', a.patronymic, ' ', a.last_name) AS agent_full_name, " +
-		"dt.deal_type_name, at2.accommodation_type_name, t.transaction_date " +
+		"dt.deal_type_name, at2.accommodation_type_name " +
 		"FROM transactions t " +
 		"JOIN deal_types dt ON t.deal_type_id = dt.deal_type_id " +
 		"JOIN real_estates rt ON t.real_estate_id = rt.id " +
