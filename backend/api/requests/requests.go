@@ -17,10 +17,10 @@ type CreateEstateRequestBody struct {
 
 type CreateTransactionBody struct {
 	Price       float64 `json:"Price"`
-	DealType    int     `json:"DealTypeId"`
+	DealType    int     `json:"DealType"`
 	RealEstates int     `json:"RealEstates"`
-	Agents      int     `json:"Agents"`
-	Clients     int     `json:"Clients"`
+	Agent       int     `json:"Agent"`
+	Client      int     `json:"Client"`
 }
 
 type DeleteEstateRequestBody struct {

@@ -13,7 +13,7 @@ type Transactions struct {
 	DealTypeID      int       `gorm:"column:deal_type_id;foreignKey:DealTypeID"`
 	RealEstates     int       `gorm:"column:real_estate_id;foreignKey:RealEstateID"`
 	AgentID         int       `gorm:"column:agent_id;foreignKey:AgentID"`
-	ClientsID       int       `gorm:"column:client_id;foreignKey:ClientID"`
+	ClientID        int       `gorm:"column:client_id;foreignKey:ClientID"`
 }
 
 /*

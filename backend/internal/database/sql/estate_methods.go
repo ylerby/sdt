@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-func (d *Database) GetEstateRecords() []responses.GetAllRecordResult {
-	var result []responses.GetAllRecordResult
+func (d *Database) GetEstateRecords() []responses.GetEstateRecordsResult {
+	var result []responses.GetEstateRecordsResult
 	d.db.Raw(`SELECT * FROM real_estates ` +
 		`LEFT JOIN deal_types ON real_estates.deal_type_id = deal_types.deal_type_id ` +
 		`LEFT JOIN accommodation_types ON ` +

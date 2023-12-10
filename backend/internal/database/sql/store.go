@@ -17,14 +17,14 @@ type DbInterface interface {
 }
 
 type DbEstateInterface interface {
-	GetEstateRecords() []responses.GetAllRecordResult
+	GetEstateRecords() []responses.GetEstateRecordsResult
 	CreateEstateRecord(requestBody requests.CreateEstateRequestBody)
 	UpdateEstateRecord(requestBody requests.UpdateEstateRequestBody)
 	DeleteEstateRecord(id int)
 }
 
 type DbTransactionInterface interface {
-	GetTransactionRecords()
+	GetTransactionRecords() []responses.GetTransactionRecordsResult
 	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
 	UpdateTransactionRecord()
 	DeleteTransactionRecord()
