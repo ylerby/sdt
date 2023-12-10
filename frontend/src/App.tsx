@@ -338,12 +338,14 @@ const AppInner = ({ path: mode }: { path: Path }) => {
   return (
     <Flex justifyContent="center" className="app">
       <Flex direction="column" gap={2}>
-        <Tabs
-          items={[
-            { id: "Транзакции", title: "Транзакции" },
-            { id: "Объявления", title: "Объявления" },
-          ]}
-        />
+        {mode === "/admin" && (
+          <Tabs
+            items={[
+              { id: "Транзакции", title: "Транзакции" },
+              { id: "Объявления", title: "Объявления" },
+            ]}
+          />
+        )}
         <Flex gap={2} alignItems="center">
           <TextInput
             placeholder="Поиск..."

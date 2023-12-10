@@ -12,7 +12,7 @@
 .app__table {
   margin: 8px;
   width: 90vw;
-  max-height: 80vh;
+  flex: 1;
 }
 
 .dialog {
