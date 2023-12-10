@@ -10,6 +10,7 @@ import {
   Select,
   ToasterProvider,
   TableActionConfig,
+  Tabs,
 } from "@gravity-ui/uikit";
 import { ThemeProvider } from "@gravity-ui/uikit";
 import { toaster } from "@gravity-ui/uikit/toaster-singleton";
@@ -29,7 +30,9 @@ interface Field {
   id: string;
 }
 
-const AppInner = () => {
+type Path = "/admin" | "/client" | "/";
+
+const AppInner = ({ path: mode }: { path: Path }) => {
   const [textFilter, setTextFilter] = useState("");
   const [data, setData] = useState<RealEstate[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -117,6 +120,9 @@ const AppInner = () => {
     item: RealEstate,
     ind: number
   ): TableActionConfig<RealEstate>[] => {
+    if (mode === "/client") {
+      return [];
+    }
     return [
       {
         text: "Редактировать",
@@ -330,157 +336,200 @@ const AppInner = () => {
   }, []);
 
   return (
-    <ThemeProvider>
-      <Flex justifyContent="center" className="app">
-        <Flex direction="column">
-          <Flex gap={2} alignItems="center">
-            <TextInput
-              placeholder="Поиск..."
-              size={ACTION_SIZE}
-              value={textFilter}
-              onUpdate={onTextFilterUpdate}
-            />
+    <Flex justifyContent="center" className="app">
+      <Flex direction="column" gap={2}>
+        <Tabs
+          items={[
+            { id: "Транзакции", title: "Транзакции" },
+            { id: "Объявления", title: "Объявления" },
+          ]}
+        />
+        <Flex gap={2} alignItems="center">
+          <TextInput
+            placeholder="Поиск..."
+            size={ACTION_SIZE}
+            value={textFilter}
+            onUpdate={onTextFilterUpdate}
+          />
+          <Select
+            size={ACTION_SIZE}
+            placeholder={getName("Accommodation")}
+            options={Accommodation_OPTIONS}
+            onUpdate={(values) =>
+              setFilters((prev) => ({
+                ...prev,
+                Accommodation: REVERSE_MAP["Accommodation"][values[0]],
+              }))
+            }
+            hasClear
+          />
+          <Select
+            size={ACTION_SIZE}
+            placeholder={getName("DealType")}
+            options={DealType_OPTIONS}
+            onUpdate={(values) => {
+              setFilters((prev) => ({
+                ...prev,
+                DealType: REVERSE_MAP["DealType"][values[0]],
+              }));
+            }}
+            hasClear
+          />
+          <Button view="action" size={ACTION_SIZE} onClick={onDialogOpen}>
+            Создать объявление
+          </Button>
+        </Flex>
+        <Table
+          className="app__table"
+          data={data.slice().reverse()}
+          columns={COLUMNS}
+          getRowActions={getRowActions}
+        />
+      </Flex>
+      <Dialog
+        open={isDialogOpen}
+        onClose={onDialogClose}
+        hasCloseButton={false}
+        className="dialog"
+      >
+        <Flex gap={4} direction="column">
+          <Flex direction="column" gap={2}>
+            <Flex alignItems="center" justifyContent="center">
+              <Text variant="header-1">Создание объявления</Text>
+            </Flex>
             <Select
-              size={ACTION_SIZE}
-              placeholder={getName("Accommodation")}
+              label={getName("Accommodation")}
+              value={[getValue("Accommodation") as string]}
               options={Accommodation_OPTIONS}
-              onUpdate={(values) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  Accommodation: REVERSE_MAP["Accommodation"][values[0]],
-                }))
-              }
-              hasClear
+              onUpdate={(values) => onUpdateSelect(values, "Accommodation")}
             />
             <Select
-              size={ACTION_SIZE}
-              placeholder={getName("DealType")}
+              label={getName("DealType")}
+              value={[getValue("DealType") as string]}
               options={DealType_OPTIONS}
-              onUpdate={(values) => {
-                setFilters((prev) => ({
-                  ...prev,
-                  DealType: REVERSE_MAP["DealType"][values[0]],
-                }));
-              }}
-              hasClear
+              onUpdate={(values) => onUpdateSelect(values, "DealType")}
             />
-            <Button view="action" size={ACTION_SIZE} onClick={onDialogOpen}>
-              Создать объявление
+            <TextInput
+              label={getName("ApartmentNumber")}
+              id="ApartmentNumber"
+              value={String(getValue("ApartmentNumber"))}
+              onChange={onChangeDraft}
+              type="number"
+            />
+            <TextInput
+              label={getName("District")}
+              id="District"
+              value={String(getValue("District"))}
+              onChange={onChangeDraft}
+            />
+            <TextInput
+              label={getName("Floor")}
+              id="Floor"
+              value={String(getValue("Floor"))}
+              onChange={onChangeDraft}
+              type="number"
+            />
+            <TextInput
+              label={getName("FloorsCount")}
+              id="FloorsCount"
+              value={String(getValue("FloorsCount"))}
+              onChange={onChangeDraft}
+              type="number"
+            />
+            <TextInput
+              label={getName("HouseNumber")}
+              id="HouseNumber"
+              value={String(getValue("HouseNumber"))}
+              onChange={onChangeDraft}
+            />
+            <TextInput
+              label={getName("Metro")}
+              id="Metro"
+              value={String(getValue("Metro"))}
+              onChange={onChangeDraft}
+            />
+            <TextInput
+              label={getName("RoomsCount")}
+              id="RoomsCount"
+              value={String(getValue("RoomsCount"))}
+              onChange={onChangeDraft}
+              type="number"
+            />
+            <TextInput
+              label={getName("Street")}
+              id="Street"
+              value={String(getValue("Street"))}
+              onChange={onChangeDraft}
+            />
+            <TextInput
+              label={getName("TotalMeters")}
+              id="TotalMeters"
+              value={String(getValue("TotalMeters"))}
+              onChange={onChangeDraft}
+              type="number"
+            />
+            <TextInput
+              label={getName("Price")}
+              id="Price"
+              value={String(getValue("Price"))}
+              onChange={onChangeDraft}
+              type="number"
+            />
+          </Flex>
+          <Flex justifyContent="flex-end">
+            <Button view="action" onClick={onCreate}>
+              {dialogMode === "create" ? "Создать" : "Редактировать"}
             </Button>
           </Flex>
-          <Table
-            className="app__table"
-            data={data.slice().reverse()}
-            columns={COLUMNS}
-            getRowActions={getRowActions}
-          />
         </Flex>
-        <Dialog
-          open={isDialogOpen}
-          onClose={onDialogClose}
-          hasCloseButton={false}
-          className="dialog"
-        >
-          <Flex gap={4} direction="column">
-            <Flex direction="column" gap={2}>
-              <Flex alignItems="center" justifyContent="center">
-                <Text variant="header-1">Создание объявления</Text>
-              </Flex>
-              <Select
-                label={getName("Accommodation")}
-                value={[getValue("Accommodation") as string]}
-                options={Accommodation_OPTIONS}
-                onUpdate={(values) => onUpdateSelect(values, "Accommodation")}
-              />
-              <Select
-                label={getName("DealType")}
-                value={[getValue("DealType") as string]}
-                options={DealType_OPTIONS}
-                onUpdate={(values) => onUpdateSelect(values, "DealType")}
-              />
-              <TextInput
-                label={getName("ApartmentNumber")}
-                id="ApartmentNumber"
-                value={String(getValue("ApartmentNumber"))}
-                onChange={onChangeDraft}
-                type="number"
-              />
-              <TextInput
-                label={getName("District")}
-                id="District"
-                value={String(getValue("District"))}
-                onChange={onChangeDraft}
-              />
-              <TextInput
-                label={getName("Floor")}
-                id="Floor"
-                value={String(getValue("Floor"))}
-                onChange={onChangeDraft}
-                type="number"
-              />
-              <TextInput
-                label={getName("FloorsCount")}
-                id="FloorsCount"
-                value={String(getValue("FloorsCount"))}
-                onChange={onChangeDraft}
-                type="number"
-              />
-              <TextInput
-                label={getName("HouseNumber")}
-                id="HouseNumber"
-                value={String(getValue("HouseNumber"))}
-                onChange={onChangeDraft}
-              />
-              <TextInput
-                label={getName("Metro")}
-                id="Metro"
-                value={String(getValue("Metro"))}
-                onChange={onChangeDraft}
-              />
-              <TextInput
-                label={getName("RoomsCount")}
-                id="RoomsCount"
-                value={String(getValue("RoomsCount"))}
-                onChange={onChangeDraft}
-                type="number"
-              />
-              <TextInput
-                label={getName("Street")}
-                id="Street"
-                value={String(getValue("Street"))}
-                onChange={onChangeDraft}
-              />
-              <TextInput
-                label={getName("TotalMeters")}
-                id="TotalMeters"
-                value={String(getValue("TotalMeters"))}
-                onChange={onChangeDraft}
-                type="number"
-              />
-              <TextInput
-                label={getName("Price")}
-                id="Price"
-                value={String(getValue("Price"))}
-                onChange={onChangeDraft}
-                type="number"
-              />
-            </Flex>
-            <Flex justifyContent="flex-end">
-              <Button view="action" onClick={onCreate}>
-                {dialogMode === "create" ? "Создать" : "Редактировать"}
-              </Button>
-            </Flex>
-          </Flex>
-        </Dialog>
-      </Flex>
-    </ThemeProvider>
+      </Dialog>
+    </Flex>
   );
 };
 
 export const App = () => {
+  const [path, setPath] = useState<Path>(window.location.pathname as Path);
+
+  useEffect(() => {
+    window.addEventListener("popstate", () => {
+      setPath(window.location.pathname as Path);
+    });
+  }, []);
+
   return (
-    <ToasterProvider>
-      <AppInner />
-    </ToasterProvider>
+    <ThemeProvider>
+      <ToasterProvider>
+        {path !== "/" && <AppInner path={path} />}
+        {path === "/" && (
+          <Flex
+            alignItems="center"
+            justifyContent="center"
+            className="bg"
+            gap={2}
+          >
+            <Button
+              onClick={() => {
+                setPath("/admin");
+                window.history.pushState({}, "", "/admin");
+              }}
+              size="xl"
+              view="action"
+            >
+              Админ
+            </Button>
+            <Button
+              onClick={() => {
+                setPath("/client");
+                window.history.pushState({}, "", "/client");
+              }}
+              size="xl"
+              view="action"
+            >
+              Клиент
+            </Button>
+          </Flex>
+        )}
+      </ToasterProvider>
+    </ThemeProvider>
   );
 };

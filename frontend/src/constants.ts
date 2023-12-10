@@ -10,7 +10,6 @@ export const MAP: Record<string, Record<number, string>> = {
     1: "Частный дом",
     2: "Таун-хаус",
     3: "Аппартаменты",
-    4: "Комната",
   },
 };
 
@@ -24,7 +23,6 @@ export const REVERSE_MAP: Record<string, Record<string, number>> = {
     "Частный дом": 1,
     "Таун-хаус": 2,
     Аппартаменты: 3,
-    Комната: 4,
   },
 };
 
