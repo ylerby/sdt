@@ -8,6 +8,24 @@ import (
 	"net/http"
 )
 
+func (a *App) GetEstateHandler(w http.ResponseWriter, r *http.Request) {
+	result := a.Database.GetEstateRecords()
+
+	res, err := json.Marshal(schemas.Response{
+		Data:          result,
+		ResponseError: "",
+	})
+
+	if err != nil {
+		log.Printf("Ошибка при сериализации %s", err)
+	}
+
+	_, err = w.Write(res)
+	if err != nil {
+		log.Printf("Ошибка при записи %s", err)
+	}
+}
+
 func (a *App) CreateEstateHandler(w http.ResponseWriter, r *http.Request) {
 	var currentRequestBody requests.CreateEstateRequestBody
 	err := json.NewDecoder(r.Body).Decode(&currentRequestBody)

@@ -34,10 +34,15 @@ func (a *App) StartApp() {
 
 	log.Println("успешное подключение к БД")
 
-	http.HandleFunc("/update/estate", a.UpdateEstateHandler)
+	http.HandleFunc("/get/estate", a.GetEstateHandler)
 	http.HandleFunc("/create/estate", a.CreateEstateHandler)
+	http.HandleFunc("/update/estate", a.UpdateEstateHandler)
 	http.HandleFunc("/delete/estate", a.DeleteEstateHandler)
-	http.HandleFunc("/get/estate", a.GetAllRecords)
+
+	http.HandleFunc("/get/transaction", a.GetTransactionHandler)
+	http.HandleFunc("/create/transaction", a.CreateTransactionHandler)
+	http.HandleFunc("/update/transaction", a.UpdateTransactionHandler)
+	http.HandleFunc("delete/transaction", a.DeleteTransactionHandler)
 
 	err = a.Server.ListenAndServe()
 	if err != nil {
