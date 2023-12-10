@@ -44,8 +44,9 @@ func (d *Database) CreateTransactionRecord(requestBody requests.CreateTransactio
 
 func (d *Database) DeleteEstateRecord(id int) bool {
 	//todo: сделать проверку на существование элемента
-	d.db.Exec(fmt.Sprintf("DELETE FROM real_estates "+
-		"WHERE id = %d", id))
+
+	d.db.Exec(fmt.Sprintf("WITH deleted_transactions AS "+
+		" (DELETE FROM transactions    WHERE real_estate_id = %d    RETURNING * ) DELETE FROM real_estates WHERE id = %d", id, id))
 	return true
 }
 
@@ -62,12 +63,14 @@ func (d *Database) UpdateEstateRecord(requestBody requests.UpdateEstateRequestBo
 		" street = '%s',"+
 		" house_number = '%s',"+
 		" apartment_number = %d,"+
-		" metro = '%s'"+
+		" metro = '%s',"+
+		" price = %f"+
 		" WHERE id = %d",
 		requestBody.DealType, requestBody.Accommodation, requestBody.Floor,
 		requestBody.FloorsCount, requestBody.RoomsCount, requestBody.TotalMeters,
 		requestBody.District, requestBody.Street, requestBody.HouseNumber,
-		requestBody.ApartmentNumber, requestBody.Metro, requestBody.ID,
+		requestBody.ApartmentNumber, requestBody.Metro, requestBody.Price,
+		requestBody.ID,
 	))
 }
 
