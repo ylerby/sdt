@@ -143,10 +143,10 @@ const AppInner = () => {
       },
       {
         text: "Удалить",
-        handler: ({ Street, HouseNumber, ApartmentNumber }: RealEstate) => {
+        handler: ({ RealEstateID: ID }: RealEstate) => {
           fetch("/delete/estate", {
             method: "DELETE",
-            body: JSON.stringify({ Street, HouseNumber, ApartmentNumber }),
+            body: JSON.stringify({ ID }),
           })
             .then(() => {
               getElements((res) => setFilteredData(res.Data));
