@@ -7,13 +7,13 @@ import (
 
 type Transactions struct {
 	gorm.Model
-	TransactionID   int       `gorm:"primary key"`
-	Price           float64   `gorm:"price"`
-	TransactionDate time.Time `gorm:"transaction_date"`
-	DealTypeID      int       `gorm:"foreignKey:DealTypeID"`
-	RealEstates     int       `gorm:"foreignKey:RealEstateID"`
-	Agents          int       `gorm:"foreignKey:AgentID"`
-	Clients         int       `gorm:"foreignKey:ClientID"`
+	TransactionID   int       `gorm:"primary key;column:transaction_id;autoIncrement"`
+	Price           float64   `gorm:"column:price"`
+	TransactionDate time.Time `gorm:"column:transaction_date;transaction_date"`
+	DealTypeID      int       `gorm:"column:deal_type_id;foreignKey:DealTypeID"`
+	RealEstates     int       `gorm:"column:real_estate_id;foreignKey:RealEstateID"`
+	AgentID         int       `gorm:"column:agent_id;foreignKey:AgentID"`
+	ClientsID       int       `gorm:"column:client_id;foreignKey:ClientID"`
 }
 
 /*
