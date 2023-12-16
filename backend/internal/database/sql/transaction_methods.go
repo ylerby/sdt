@@ -10,7 +10,7 @@ import (
 func (d *Database) GetTransactionRecords() []responses.GetTransactionRecordsResult {
 	var result []responses.GetTransactionRecordsResult
 	d.db.Raw("SELECT " +
-		"t.price AS transaction_price, t.transaction_date, " +
+		"t.id, t.price AS transaction_price, t.transaction_date, " +
 		"CONCAT(c.first_name, ' ', c.patronymic, ' ', c.last_name) AS client_full_name, " +
 		"CONCAT(a.first_name, ' ', a.patronymic, ' ', a.last_name) AS agent_full_name, " +
 		"dt.deal_type_name, at2.accommodation_type_name " +

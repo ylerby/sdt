@@ -18,11 +18,13 @@ func (a *App) GetEstateHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Printf("Ошибка при сериализации %s", err)
+		return
 	}
 
 	_, err = w.Write(res)
 	if err != nil {
 		log.Printf("Ошибка при записи %s", err)
+		return
 	}
 }
 
@@ -115,5 +117,6 @@ func (a *App) DeleteEstateHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = w.Write(res)
 	if err != nil {
 		log.Printf("Ошибка при ответе %s", err)
+		return
 	}
 }

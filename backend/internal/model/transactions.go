@@ -7,7 +7,7 @@ import (
 
 type Transactions struct {
 	gorm.Model
-	TransactionID   int       `gorm:"primary key;column:transaction_id;autoIncrement"`
+	TransactionID   int       `gorm:"primary key;column:id;autoIncrement"`
 	Price           float64   `gorm:"column:price"`
 	TransactionDate time.Time `gorm:"column:transaction_date;transaction_date"`
 	DealTypeID      int       `gorm:"column:deal_type_id;foreignKey:DealTypeID"`
