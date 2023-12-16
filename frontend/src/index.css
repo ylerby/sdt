@@ -4,15 +4,11 @@
 }
 
 .app {
-  padding: 20px;
-  height: 100vh;
-  width: 100vw;
+  padding: 10px 40px;
 }
 
 .app__table {
   margin: 8px;
-  width: 90vw;
-  flex: 1;
 }
 
 .dialog {
@@ -26,4 +22,16 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
     url("mai.jpg");
   background-size: cover;
+}
+
+.ReportsPage__listItem {
+  cursor: pointer;
+}
+
+.ReportsPage__listItem:hover {
+  color: blue;
+}
+
+.ReportsPage__listItem_selected {
+  background: rgb(203, 203, 251);
 }
