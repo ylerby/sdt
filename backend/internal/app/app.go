@@ -12,7 +12,6 @@ import (
 type App struct {
 	Database sql.DbInterface
 	Server   *http.Server
-	Mapping  map[string]map[int]string
 }
 
 // New - создание приложения
@@ -45,14 +44,11 @@ func (a *App) StartApp() {
 	http.HandleFunc("delete/transaction", a.DeleteTransactionHandler)
 
 	err = a.Server.ListenAndServe()
-	if err != nil {
-		log.Printf("ошибка при запуске сервера %s", err)
-		return
-	}
 }
 
 // StopApp - завершение работы http-сервера
 func (a *App) StopApp() {
+	log.Printf("Gracefull shutdown")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
