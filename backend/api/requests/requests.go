@@ -15,18 +15,6 @@ type CreateEstateRequestBody struct {
 	Price           float64 `json:"Price"`
 }
 
-type CreateTransactionBody struct {
-	Price       float64 `json:"Price"`
-	DealType    int     `json:"DealType"`
-	RealEstates int     `json:"RealEstates"`
-	Agent       int     `json:"Agent"`
-	Client      int     `json:"Client"`
-}
-
-type DeleteEstateRequestBody struct {
-	ID int `json:"id"`
-}
-
 type UpdateEstateRequestBody struct {
 	ID              int     `json:"ID"`
 	Accommodation   int     `json:"Accommodation"`
@@ -41,4 +29,28 @@ type UpdateEstateRequestBody struct {
 	ApartmentNumber int     `json:"ApartmentNumber"`
 	Metro           string  `json:"Metro"`
 	Price           float64 `json:"Price"`
+}
+
+type DeleteEstateRequestBody struct {
+	ID int `json:"id"`
+}
+
+type CreateTransactionBody struct {
+	Price       float64 `json:"Price"`
+	DealType    int     `json:"DealType"`
+	RealEstates int     `json:"RealEstates"`
+	Agent       int     `json:"Agent"`
+	Client      int     `json:"Client"`
+}
+
+type UpdateTransactionRequestBody struct {
+	Price       float64 `json:"Price"`
+	DealType    int     `json:"DealType"`
+	RealEstates int     `json:"RealEstates"`
+	Agent       int     `json:"Agent"`
+	Client      int     `json:"Client"`
+}
+
+type DeleteTransactionRequestBody struct {
+	ID int `json:"id"`
 }

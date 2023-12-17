@@ -26,6 +26,6 @@ type DbEstateInterface interface {
 type DbTransactionInterface interface {
 	GetTransactionRecords() []responses.GetTransactionRecordsResult
 	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
-	UpdateTransactionRecord()
-	DeleteTransactionRecord()
+	UpdateTransactionRecord(requestBody requests.UpdateTransactionRequestBody)
+	DeleteTransactionRecord(id int)
 }
