@@ -11,6 +11,10 @@
   margin: 8px;
 }
 
+.transaction__table {
+  align-self: center;
+}
+
 .dialog {
   padding: 30px 50px;
   width: 50vw;
@@ -34,4 +38,8 @@
 
 .ReportsPage__listItem_selected {
   background: rgb(203, 203, 251);
+}
+
+.yc-table__table thead tr:first-of-type th:first-of-type span {
+  display: none;
 }

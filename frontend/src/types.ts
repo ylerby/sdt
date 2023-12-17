@@ -15,8 +15,23 @@ export interface RealEstate {
   PublicationDate: string;
 }
 
+export interface Transaction {
+  TransactionID: number;
+  TransactionDate: string;
+  TransactionPrice: number;
+  AccommodationTypeName: string;
+  AgentFullName: string;
+  ClientFullName: string;
+  DealTypeName: string;
+}
+
 export interface GetResponse {
   Data: RealEstate[];
+  RequestError: string;
+}
+
+export interface GetResponseTransaction {
+  Data: Transaction[];
   RequestError: string;
 }
 
