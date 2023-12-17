@@ -1,0 +1,905 @@
+[
+ {
+   "FIELD1": 0,
+   "client_id": 1,
+   "first_name": "Александр",
+   "patronymic": "Игоревич",
+   "last_name": "Лебедев"
+ },
+ {
+   "FIELD1": 1,
+   "client_id": 2,
+   "first_name": "Ольга",
+   "patronymic": "Валентиновна",
+   "last_name": "Сидорова"
+ },
+ {
+   "FIELD1": 2,
+   "client_id": 3,
+   "first_name": "Дмитрий",
+   "patronymic": "Сергеевич",
+   "last_name": "Шестаков"
+ },
+ {
+   "FIELD1": 3,
+   "client_id": 4,
+   "first_name": "Екатерина",
+   "patronymic": "Анатольевна",
+   "last_name": "Полякова"
+ },
+ {
+   "FIELD1": 4,
+   "client_id": 5,
+   "first_name": "Максим",
+   "patronymic": "Валерьевич",
+   "last_name": "Федотов"
+ },
+ {
+   "FIELD1": 5,
+   "client_id": 6,
+   "first_name": "Ирина",
+   "patronymic": "Александровна",
+   "last_name": "Никитина"
+ },
+ {
+   "FIELD1": 6,
+   "client_id": 7,
+   "first_name": "Антонина",
+   "patronymic": "Владимировна",
+   "last_name": "Морозова"
+ },
+ {
+   "FIELD1": 7,
+   "client_id": 8,
+   "first_name": "Павел",
+   "patronymic": "Юрьевич",
+   "last_name": "Куликов"
+ },
+ {
+   "FIELD1": 8,
+   "client_id": 9,
+   "first_name": "Татьяна",
+   "patronymic": "Алексеевна",
+   "last_name": "Горбунова"
+ },
+ {
+   "FIELD1": 9,
+   "client_id": 10,
+   "first_name": "Артем",
+   "patronymic": "Андреевич",
+   "last_name": "Руднев"
+ },
+ {
+   "FIELD1": 10,
+   "client_id": 11,
+   "first_name": "Елена",
+   "patronymic": "Петровна",
+   "last_name": "Лисина"
+ },
+ {
+   "FIELD1": 11,
+   "client_id": 12,
+   "first_name": "Никита",
+   "patronymic": "Валерьевич",
+   "last_name": "Чернов"
+ },
+ {
+   "FIELD1": 12,
+   "client_id": 13,
+   "first_name": "Анастасия",
+   "patronymic": "Станиславовна",
+   "last_name": "Петрова"
+ },
+ {
+   "FIELD1": 13,
+   "client_id": 14,
+   "first_name": "Владимир",
+   "patronymic": "Дмитриевич",
+   "last_name": "Лапин"
+ },
+ {
+   "FIELD1": 14,
+   "client_id": 15,
+   "first_name": "Юлия",
+   "patronymic": "Игоревна",
+   "last_name": "Семенова"
+ },
+ {
+   "FIELD1": 15,
+   "client_id": 16,
+   "first_name": "Станислав",
+   "patronymic": "Анатольевич",
+   "last_name": "Миронов"
+ },
+ {
+   "FIELD1": 16,
+   "client_id": 17,
+   "first_name": "Евгения",
+   "patronymic": "Александровна",
+   "last_name": "Беляева"
+ },
+ {
+   "FIELD1": 17,
+   "client_id": 18,
+   "first_name": "Игорь",
+   "patronymic": "Викторович",
+   "last_name": "Ларин"
+ },
+ {
+   "FIELD1": 18,
+   "client_id": 19,
+   "first_name": "Светлана",
+   "patronymic": "Сергеевна",
+   "last_name": "Козлова"
+ },
+ {
+   "FIELD1": 19,
+   "client_id": 20,
+   "first_name": "Артур",
+   "patronymic": "Александрович",
+   "last_name": "Федосеев"
+ },
+ {
+   "FIELD1": 20,
+   "client_id": 21,
+   "first_name": "Мария",
+   "patronymic": "Валерьевна",
+   "last_name": "Рябова"
+ },
+ {
+   "FIELD1": 21,
+   "client_id": 22,
+   "first_name": "Владислав",
+   "patronymic": "Игнатьевич",
+   "last_name": "Баранов"
+ },
+ {
+   "FIELD1": 22,
+   "client_id": 23,
+   "first_name": "Алла",
+   "patronymic": "Анатольевна",
+   "last_name": "Григорьева"
+ },
+ {
+   "FIELD1": 23,
+   "client_id": 24,
+   "first_name": "Роман",
+   "patronymic": "Викторович",
+   "last_name": "Титов"
+ },
+ {
+   "FIELD1": 24,
+   "client_id": 25,
+   "first_name": "Анна",
+   "patronymic": "Васильевна",
+   "last_name": "Колесникова"
+ },
+ {
+   "FIELD1": 25,
+   "client_id": 26,
+   "first_name": "Кирилл",
+   "patronymic": "Андреевич",
+   "last_name": "Широков"
+ },
+ {
+   "FIELD1": 26,
+   "client_id": 27,
+   "first_name": "Оксана",
+   "patronymic": "Владимировна",
+   "last_name": "Зайцева"
+ },
+ {
+   "FIELD1": 27,
+   "client_id": 28,
+   "first_name": "Денис",
+   "patronymic": "Алексеевич",
+   "last_name": "Панов"
+ },
+ {
+   "FIELD1": 28,
+   "client_id": 29,
+   "first_name": "Елена",
+   "patronymic": "Ярославовна",
+   "last_name": "Федорова"
+ },
+ {
+   "FIELD1": 29,
+   "client_id": 30,
+   "first_name": "Арсений",
+   "patronymic": "Станиславович",
+   "last_name": "Крылов"
+ },
+ {
+   "FIELD1": 30,
+   "client_id": 31,
+   "first_name": "Милана",
+   "patronymic": "Васильевна",
+   "last_name": "Соколова"
+ },
+ {
+   "FIELD1": 31,
+   "client_id": 32,
+   "first_name": "Валентин",
+   "patronymic": "Викторович",
+   "last_name": "Шевцов"
+ },
+ {
+   "FIELD1": 32,
+   "client_id": 33,
+   "first_name": "Алёна",
+   "patronymic": "Игоревна",
+   "last_name": "Жукова"
+ },
+ {
+   "FIELD1": 33,
+   "client_id": 34,
+   "first_name": "Игнатий",
+   "patronymic": "Валентинович",
+   "last_name": "Комаров"
+ },
+ {
+   "FIELD1": 34,
+   "client_id": 35,
+   "first_name": "София",
+   "patronymic": "Анатольевна",
+   "last_name": "Пономарева"
+ },
+ {
+   "FIELD1": 35,
+   "client_id": 36,
+   "first_name": "Лев",
+   "patronymic": "Артемович",
+   "last_name": "Горбачев"
+ },
+ {
+   "FIELD1": 36,
+   "client_id": 37,
+   "first_name": "Юлия",
+   "patronymic": "Алексеевна",
+   "last_name": "Назарова"
+ },
+ {
+   "FIELD1": 37,
+   "client_id": 38,
+   "first_name": "Михаил",
+   "patronymic": "Валерьевич",
+   "last_name": "Сухарев"
+ },
+ {
+   "FIELD1": 38,
+   "client_id": 39,
+   "first_name": "Вероника",
+   "patronymic": "Игоревна",
+   "last_name": "Мельникова"
+ },
+ {
+   "FIELD1": 39,
+   "client_id": 40,
+   "first_name": "Егор",
+   "patronymic": "Андреевич",
+   "last_name": "Беляков"
+ },
+ {
+   "FIELD1": 40,
+   "client_id": 41,
+   "first_name": "Ангелина",
+   "patronymic": "Артемовна",
+   "last_name": "Попова"
+ },
+ {
+   "FIELD1": 41,
+   "client_id": 42,
+   "first_name": "Степан",
+   "patronymic": "Александрович",
+   "last_name": "Лебедев"
+ },
+ {
+   "FIELD1": 42,
+   "client_id": 43,
+   "first_name": "Алла",
+   "patronymic": "Валентиновна",
+   "last_name": "Дмитриева"
+ },
+ {
+   "FIELD1": 43,
+   "client_id": 44,
+   "first_name": "Виктор",
+   "patronymic": "Викторович",
+   "last_name": "Романов"
+ },
+ {
+   "FIELD1": 44,
+   "client_id": 45,
+   "first_name": "Анастасия",
+   "patronymic": "Анатольевна",
+   "last_name": "Богданова"
+ },
+ {
+   "FIELD1": 45,
+   "client_id": 46,
+   "first_name": "Павел",
+   "patronymic": "Валерьевич",
+   "last_name": "Семенов"
+ },
+ {
+   "FIELD1": 46,
+   "client_id": 47,
+   "first_name": "Элина",
+   "patronymic": "Сергеевна",
+   "last_name": "Федотова"
+ },
+ {
+   "FIELD1": 47,
+   "client_id": 48,
+   "first_name": "Сергей",
+   "patronymic": "Игоревич",
+   "last_name": "Кузнецов"
+ },
+ {
+   "FIELD1": 48,
+   "client_id": 49,
+   "first_name": "Ольга",
+   "patronymic": "Викторовна",
+   "last_name": "Тихонова"
+ },
+ {
+   "FIELD1": 49,
+   "client_id": 50,
+   "first_name": "Артур",
+   "patronymic": "Анатольевич",
+   "last_name": "Головин"
+ },
+ {
+   "FIELD1": 50,
+   "client_id": 51,
+   "first_name": "Надежда",
+   "patronymic": "Сергеевна",
+   "last_name": "Полякова"
+ },
+ {
+   "FIELD1": 51,
+   "client_id": 52,
+   "first_name": "Илья",
+   "patronymic": "Александрович",
+   "last_name": "Новиков"
+ },
+ {
+   "FIELD1": 52,
+   "client_id": 53,
+   "first_name": "Евгения",
+   "patronymic": "Валентиновна",
+   "last_name": "Ларина"
+ },
+ {
+   "FIELD1": 53,
+   "client_id": 54,
+   "first_name": "Даниил",
+   "patronymic": "Артемович",
+   "last_name": "Козлов"
+ },
+ {
+   "FIELD1": 54,
+   "client_id": 55,
+   "first_name": "Людмила",
+   "patronymic": "Анатольевна",
+   "last_name": "Игнатьева"
+ },
+ {
+   "FIELD1": 55,
+   "client_id": 56,
+   "first_name": "Руслан",
+   "patronymic": "Валерьевич",
+   "last_name": "Карпов"
+ },
+ {
+   "FIELD1": 56,
+   "client_id": 57,
+   "first_name": "Тамара",
+   "patronymic": "Игоревна",
+   "last_name": "Шестакова"
+ },
+ {
+   "FIELD1": 57,
+   "client_id": 58,
+   "first_name": "Артем",
+   "patronymic": "Викторович",
+   "last_name": "Федосеев"
+ },
+ {
+   "FIELD1": 58,
+   "client_id": 59,
+   "first_name": "Лилия",
+   "patronymic": "Александровна",
+   "last_name": "Лисина"
+ },
+ {
+   "FIELD1": 59,
+   "client_id": 60,
+   "first_name": "Владислав",
+   "patronymic": "Степанович",
+   "last_name": "Горбунов"
+ },
+ {
+   "FIELD1": 60,
+   "client_id": 61,
+   "first_name": "Екатерина",
+   "patronymic": "Артемовна",
+   "last_name": "Куликова"
+ },
+ {
+   "FIELD1": 61,
+   "client_id": 62,
+   "first_name": "Андрей",
+   "patronymic": "Игнатьевич",
+   "last_name": "Колесников"
+ },
+ {
+   "FIELD1": 62,
+   "client_id": 63,
+   "first_name": "Дарья",
+   "patronymic": "Валентиновна",
+   "last_name": "Степанова"
+ },
+ {
+   "FIELD1": 63,
+   "client_id": 64,
+   "first_name": "Григорий",
+   "patronymic": "Анатольевич",
+   "last_name": "Миронов"
+ },
+ {
+   "FIELD1": 64,
+   "client_id": 65,
+   "first_name": "Марина",
+   "patronymic": "Васильевна",
+   "last_name": "Руднева"
+ },
+ {
+   "FIELD1": 65,
+   "client_id": 66,
+   "first_name": "Иван",
+   "patronymic": "Викторович",
+   "last_name": "Ларин"
+ },
+ {
+   "FIELD1": 66,
+   "client_id": 67,
+   "first_name": "Вероника",
+   "patronymic": "Александровна",
+   "last_name": "Петрова"
+ },
+ {
+   "FIELD1": 67,
+   "client_id": 68,
+   "first_name": "Станислав",
+   "patronymic": "Артемович",
+   "last_name": "Тимофеев"
+ },
+ {
+   "FIELD1": 68,
+   "client_id": 69,
+   "first_name": "Юлия",
+   "patronymic": "Сергеевна",
+   "last_name": "Федосеева"
+ },
+ {
+   "FIELD1": 69,
+   "client_id": 70,
+   "first_name": "Антон",
+   "patronymic": "Анатольевич",
+   "last_name": "Петров"
+ },
+ {
+   "FIELD1": 70,
+   "client_id": 71,
+   "first_name": "Анна",
+   "patronymic": "Валентиновна",
+   "last_name": "Григорьева"
+ },
+ {
+   "FIELD1": 71,
+   "client_id": 72,
+   "first_name": "Максим",
+   "patronymic": "Викторович",
+   "last_name": "Титов"
+ },
+ {
+   "FIELD1": 72,
+   "client_id": 73,
+   "first_name": "Лидия",
+   "patronymic": "Артемовна",
+   "last_name": "Колесникова"
+ },
+ {
+   "FIELD1": 73,
+   "client_id": 74,
+   "first_name": "Роман",
+   "patronymic": "Сергеевич",
+   "last_name": "Широков"
+ },
+ {
+   "FIELD1": 74,
+   "client_id": 75,
+   "first_name": "Нина",
+   "patronymic": "Игоревна",
+   "last_name": "Зайцева"
+ },
+ {
+   "FIELD1": 75,
+   "client_id": 76,
+   "first_name": "Денис",
+   "patronymic": "Валентинович",
+   "last_name": "Панов"
+ },
+ {
+   "FIELD1": 76,
+   "client_id": 77,
+   "first_name": "Ксения",
+   "patronymic": "Андреевна",
+   "last_name": "Федорова"
+ },
+ {
+   "FIELD1": 77,
+   "client_id": 78,
+   "first_name": "Валерий",
+   "patronymic": "Анатольевич",
+   "last_name": "Крылов"
+ },
+ {
+   "FIELD1": 78,
+   "client_id": 79,
+   "first_name": "Маргарита",
+   "patronymic": "Артемовна",
+   "last_name": "Соколова"
+ },
+ {
+   "FIELD1": 79,
+   "client_id": 80,
+   "first_name": "Аркадий",
+   "patronymic": "Станиславович",
+   "last_name": "Шевцов"
+ },
+ {
+   "FIELD1": 80,
+   "client_id": 81,
+   "first_name": "Наталья",
+   "patronymic": "Васильевна",
+   "last_name": "Жукова"
+ },
+ {
+   "FIELD1": 81,
+   "client_id": 82,
+   "first_name": "Степан",
+   "patronymic": "Викторович",
+   "last_name": "Комаров"
+ },
+ {
+   "FIELD1": 82,
+   "client_id": 83,
+   "first_name": "Вероника",
+   "patronymic": "Игнатьевна",
+   "last_name": "Пономарева"
+ },
+ {
+   "FIELD1": 83,
+   "client_id": 84,
+   "first_name": "Игорь",
+   "patronymic": "Валентинович",
+   "last_name": "Горбачев"
+ },
+ {
+   "FIELD1": 84,
+   "client_id": 85,
+   "first_name": "Алиса",
+   "patronymic": "Игоревна",
+   "last_name": "Назарова"
+ },
+ {
+   "FIELD1": 85,
+   "client_id": 86,
+   "first_name": "Александр",
+   "patronymic": "Валерьевич",
+   "last_name": "Сухарев"
+ },
+ {
+   "FIELD1": 86,
+   "client_id": 87,
+   "first_name": "Дарина",
+   "patronymic": "Викторовна",
+   "last_name": "Мельникова"
+ },
+ {
+   "FIELD1": 87,
+   "client_id": 88,
+   "first_name": "Артем",
+   "patronymic": "Анатольевич",
+   "last_name": "Беляков"
+ },
+ {
+   "FIELD1": 88,
+   "client_id": 89,
+   "first_name": "София",
+   "patronymic": "Артемовна",
+   "last_name": "Попова"
+ },
+ {
+   "FIELD1": 89,
+   "client_id": 90,
+   "first_name": "Иван",
+   "patronymic": "Сергеевич",
+   "last_name": "Лебедев"
+ },
+ {
+   "FIELD1": 90,
+   "client_id": 91,
+   "first_name": "Александра",
+   "patronymic": "Валентиновна",
+   "last_name": "Дмитриева"
+ },
+ {
+   "FIELD1": 91,
+   "client_id": 92,
+   "first_name": "Максим",
+   "patronymic": "Александрович",
+   "last_name": "Тихонов"
+ },
+ {
+   "FIELD1": 92,
+   "client_id": 93,
+   "first_name": "Ольга",
+   "patronymic": "Сергеевна",
+   "last_name": "Богданова"
+ },
+ {
+   "FIELD1": 93,
+   "client_id": 94,
+   "first_name": "Владислав",
+   "patronymic": "Игоревич",
+   "last_name": "Семенов"
+ },
+ {
+   "FIELD1": 94,
+   "client_id": 95,
+   "first_name": "Вероника",
+   "patronymic": "Валентиновна",
+   "last_name": "Федотова"
+ },
+ {
+   "FIELD1": 95,
+   "client_id": 96,
+   "first_name": "Дмитрий",
+   "patronymic": "Валерьевич",
+   "last_name": "Кузнецов"
+ },
+ {
+   "FIELD1": 96,
+   "client_id": 97,
+   "first_name": "Елена",
+   "patronymic": "Александровна",
+   "last_name": "Тихонова"
+ },
+ {
+   "FIELD1": 97,
+   "client_id": 98,
+   "first_name": "Сергей",
+   "patronymic": "Валентинович",
+   "last_name": "Карпов"
+ },
+ {
+   "FIELD1": 98,
+   "client_id": 99,
+   "first_name": "Маргарита",
+   "patronymic": "Станиславовна",
+   "last_name": "Шестакова"
+ },
+ {
+   "FIELD1": 99,
+   "client_id": 100,
+   "first_name": "Самуил",
+   "patronymic": "Абрамович",
+   "last_name": "Шустер"
+ },
+ {
+   "FIELD1": 100,
+   "client_id": 101,
+   "first_name": "Анна",
+   "patronymic": "Иосифовна",
+   "last_name": "Левитан"
+ },
+ {
+   "FIELD1": 101,
+   "client_id": 102,
+   "first_name": "Яков",
+   "patronymic": "Леонидович",
+   "last_name": "Гурвич"
+ },
+ {
+   "FIELD1": 102,
+   "client_id": 103,
+   "first_name": "Лариса",
+   "patronymic": "Аркадьевна",
+   "last_name": "Левин"
+ },
+ {
+   "FIELD1": 103,
+   "client_id": 104,
+   "first_name": "Мендель",
+   "patronymic": "Аронович",
+   "last_name": "Лейбов"
+ },
+ {
+   "FIELD1": 104,
+   "client_id": 105,
+   "first_name": "Ривка",
+   "patronymic": "Леонидовна",
+   "last_name": "Гольдберг"
+ },
+ {
+   "FIELD1": 105,
+   "client_id": 106,
+   "first_name": "Михаил",
+   "patronymic": "Абрамович",
+   "last_name": "Розенберг"
+ },
+ {
+   "FIELD1": 106,
+   "client_id": 107,
+   "first_name": "Ева",
+   "patronymic": "Яковлевна",
+   "last_name": "Шапиро"
+ },
+ {
+   "FIELD1": 107,
+   "client_id": 108,
+   "first_name": "Исаак",
+   "patronymic": "Лазаревич",
+   "last_name": "Фрейдман"
+ },
+ {
+   "FIELD1": 108,
+   "client_id": 109,
+   "first_name": "Лилия",
+   "patronymic": "Иосифовна",
+   "last_name": "Абрамова"
+ },
+ {
+   "FIELD1": 109,
+   "client_id": 110,
+   "first_name": "Борис",
+   "patronymic": "Леонидович",
+   "last_name": "Кац"
+ },
+ {
+   "FIELD1": 110,
+   "client_id": 111,
+   "first_name": "Анна",
+   "patronymic": "Аркадьевна",
+   "last_name": "Левитан"
+ },
+ {
+   "FIELD1": 111,
+   "client_id": 112,
+   "first_name": "Яков",
+   "patronymic": "Маркович",
+   "last_name": "Гурвич"
+ },
+ {
+   "FIELD1": 112,
+   "client_id": 113,
+   "first_name": "Мария",
+   "patronymic": "Исааковна",
+   "last_name": "Шустер"
+ },
+ {
+   "FIELD1": 113,
+   "client_id": 114,
+   "first_name": "Лев",
+   "patronymic": "Яковлевич",
+   "last_name": "Левин"
+ },
+ {
+   "FIELD1": 114,
+   "client_id": 115,
+   "first_name": "Ирина",
+   "patronymic": "Абрамовна",
+   "last_name": "Лейбова"
+ },
+ {
+   "FIELD1": 115,
+   "client_id": 116,
+   "first_name": "Максим",
+   "patronymic": "Леонидович",
+   "last_name": "Розенберг"
+ },
+ {
+   "FIELD1": 116,
+   "client_id": 117,
+   "first_name": "Роза",
+   "patronymic": "Яковлевна",
+   "last_name": "Шапиро"
+ },
+ {
+   "FIELD1": 117,
+   "client_id": 118,
+   "first_name": "Марк",
+   "patronymic": "Аронович",
+   "last_name": "Фрейдман"
+ },
+ {
+   "FIELD1": 118,
+   "client_id": 119,
+   "first_name": "Александра",
+   "patronymic": "Иосифовна",
+   "last_name": "Левин"
+ },
+ {
+   "FIELD1": 119,
+   "client_id": 120,
+   "first_name": "Самуил",
+   "patronymic": "Леонидович",
+   "last_name": "Шустер"
+ },
+ {
+   "FIELD1": 120,
+   "client_id": 121,
+   "first_name": "Елена",
+   "patronymic": "Яковлевна",
+   "last_name": "Гурвич"
+ },
+ {
+   "FIELD1": 121,
+   "client_id": 122,
+   "first_name": "Давид",
+   "patronymic": "Маркович",
+   "last_name": "Розенберг"
+ },
+ {
+   "FIELD1": 122,
+   "client_id": 123,
+   "first_name": "Алексей",
+   "patronymic": "Леонидович",
+   "last_name": "Шапиро"
+ },
+ {
+   "FIELD1": 123,
+   "client_id": 124,
+   "first_name": "Светлана",
+   "patronymic": "Аркадьевна",
+   "last_name": "Левин"
+ },
+ {
+   "FIELD1": 124,
+   "client_id": 125,
+   "first_name": "Исаак",
+   "patronymic": "Яковлевич",
+   "last_name": "Левитан"
+ },
+ {
+   "FIELD1": 125,
+   "client_id": 126,
+   "first_name": "Рахиль",
+   "patronymic": "Менделевна",
+   "last_name": "Лейбова"
+ },
+ {
+   "FIELD1": 126,
+   "client_id": 127,
+   "first_name": "Артур",
+   "patronymic": "Исаакович",
+   "last_name": "Гольдберг"
+ },
+ {
+   "FIELD1": 127,
+   "client_id": 128,
+   "first_name": "Лия",
+   "patronymic": "Леонидовна",
+   "last_name": "Шустер"
+ },
+ {
+   "FIELD1": 128,
+   "client_id": 129,
+   "first_name": "Марк",
+   "patronymic": "Лазаревич",
+   "last_name": "Левитан"
+ }
+]
