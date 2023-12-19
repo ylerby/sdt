@@ -3,12 +3,10 @@ import {
   Flex,
   Table as _Table,
   TextInput,
-  withTableActions,
   Button,
   Dialog,
   Text,
   Select,
-  TableActionConfig,
 } from "@gravity-ui/uikit";
 import { toaster } from "@gravity-ui/uikit/toaster-singleton";
 import {
@@ -21,7 +19,7 @@ import {
 } from "../constants";
 import { Draft, GetResponseTransaction, Transaction } from "types";
 
-const Table = withTableActions<Transaction>(_Table);
+const Table = _Table;
 const ACTION_SIZE = "l";
 
 interface TransactionsTableProps {
@@ -126,60 +124,6 @@ export const TransactionsTable = ({ selectedAd }: TransactionsTableProps) => {
     },
     [selectedAd]
   );
-
-  const getRowActions = (
-    item: Transaction,
-    ind: number
-  ): TableActionConfig<Transaction>[] => {
-    return [
-      {
-        text: "Редактировать",
-        handler: (ad: Transaction, ind: number) => {
-          console.log(ad);
-          setEditRealStateId(ad.TransactionID);
-          setDraft((drafts) =>
-            drafts.map((el) => {
-              const val = ad[el.id as keyof typeof ad];
-
-              return {
-                ...el,
-                val,
-              };
-            })
-          );
-          setDialogMode("edit");
-          onDialogOpen("edit");
-        },
-      },
-      {
-        text: "Удалить",
-        handler: ({ TransactionID: ID }: Transaction) => {
-          fetch("/delete/transaction", {
-            method: "DELETE",
-            body: JSON.stringify({ ID }),
-          })
-            .then(() => {
-              getElements((res) => setFilteredData(res.Data));
-              toaster.add({
-                name: Math.random().toString(),
-                content: "Транзакция удалена",
-                type: "success",
-                autoHiding: 2000,
-              });
-            })
-            .catch((res) =>
-              toaster.add({
-                name: Math.random().toString(),
-                content: res?.ResponseError,
-                type: "error",
-                autoHiding: 2000,
-              })
-            );
-        },
-        theme: "danger",
-      },
-    ];
-  };
 
   useEffect(() => {
     getElements((res: GetResponseTransaction) => setFilteredData(res.Data));
@@ -426,7 +370,6 @@ export const TransactionsTable = ({ selectedAd }: TransactionsTableProps) => {
           className="app__table transaction__table"
           data={data.slice().reverse()}
           columns={TRANSACTIONS_COLUMNS}
-          getRowActions={getRowActions}
         />
       </Flex>
       <Dialog

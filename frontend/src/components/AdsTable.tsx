@@ -22,7 +22,8 @@ import {
 } from "../constants";
 import { Draft, GetResponse, Path, RealEstate } from "types";
 
-const Table = withTableSelection(withTableActions<RealEstate>(_Table));
+const SelectionTable = withTableSelection(withTableActions<RealEstate>(_Table));
+const ActionTable = withTableActions<RealEstate>(_Table);
 const ACTION_SIZE = "l";
 
 interface AdsTableProps {
@@ -438,14 +439,23 @@ export const AdsTable = ({
             Создать объявление
           </Button>
         </Flex>
-        <Table
-          selectedIds={selectedIds}
-          onSelectionChange={onSelectionChange}
-          className="app__table"
-          data={data.slice().reverse()}
-          columns={ADS_COLUMNS}
-          getRowActions={getRowActions}
-        />
+        {mode === "/admin" ? (
+          <SelectionTable
+            selectedIds={selectedIds}
+            onSelectionChange={onSelectionChange}
+            className="app__table"
+            data={data.slice().reverse()}
+            columns={ADS_COLUMNS}
+            getRowActions={getRowActions}
+          />
+        ) : (
+          <ActionTable
+            className="app__table"
+            data={data.slice().reverse()}
+            columns={ADS_COLUMNS}
+            getRowActions={getRowActions}
+          />
+        )}
       </Flex>
       <Dialog
         open={isDialogOpen}

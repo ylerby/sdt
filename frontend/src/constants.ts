@@ -11,7 +11,7 @@ export const MAP: Record<string, Record<number, string>> = {
     2: "Таун-хаус",
     3: "Аппартаменты",
   },
-};
+} as const;
 
 export const REVERSE_MAP: Record<string, Record<string, number>> = {
   DealType: {
