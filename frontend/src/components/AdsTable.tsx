@@ -9,11 +9,12 @@ import {
   Text,
   Select,
   TableActionConfig,
+  withTableSelection,
   Tabs,
 } from "@gravity-ui/uikit";
 import { toaster } from "@gravity-ui/uikit/toaster-singleton";
 import {
-  TRANSACTIONS_COLUMNS,
+  ADS_COLUMNS,
   CREATE_COLUMNS,
   MAP,
   REVERSE_MAP,
@@ -21,14 +22,20 @@ import {
 } from "../constants";
 import { Draft, GetResponse, Path, RealEstate } from "types";
 
-const Table = withTableActions<RealEstate>(_Table);
+const Table = withTableSelection(withTableActions<RealEstate>(_Table));
 const ACTION_SIZE = "l";
 
 interface AdsTableProps {
   path: Path;
+  setSelectedAd: (id: number | undefined) => void;
+  selectedAd?: number;
 }
 
-export const AdsTable = ({ path: mode }: AdsTableProps) => {
+export const AdsTable = ({
+  path: mode,
+  setSelectedAd,
+  selectedAd,
+}: AdsTableProps) => {
   const [textFilter, setTextFilter] = useState("");
   const [data, setData] = useState<RealEstate[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -341,7 +348,7 @@ export const AdsTable = ({ path: mode }: AdsTableProps) => {
     .map((type) => ({ value: type, content: type }));
 
   const getName = (id: string) => {
-    const column = TRANSACTIONS_COLUMNS.find((column) => column.id === id);
+    const column = ADS_COLUMNS.find((column) => column.id === id);
     return column?.name ?? "";
   };
 
@@ -350,6 +357,24 @@ export const AdsTable = ({ path: mode }: AdsTableProps) => {
     resetDraft();
     setDialogMode("create");
   }, []);
+
+  const [selectedIds, setSelectedIds] = useState<string[]>(
+    selectedAd ? [selectedAd.toString()] : []
+  );
+
+  const onSelectionChange = useCallback(
+    (ids: string[]) => {
+      if (ids.length === 0) {
+        setSelectedIds([]);
+        setSelectedAd(undefined);
+        return;
+      }
+      const id = ids[ids.length - 1];
+      setSelectedIds([id]);
+      setSelectedAd(data[parseInt(id)].RealEstateID);
+    },
+    [data, setSelectedAd]
+  );
 
   return (
     <>
@@ -414,9 +439,11 @@ export const AdsTable = ({ path: mode }: AdsTableProps) => {
           </Button>
         </Flex>
         <Table
+          selectedIds={selectedIds}
+          onSelectionChange={onSelectionChange}
           className="app__table"
           data={data.slice().reverse()}
-          columns={TRANSACTIONS_COLUMNS}
+          columns={ADS_COLUMNS}
           getRowActions={getRowActions}
         />
       </Flex>

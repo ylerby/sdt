@@ -11,6 +11,7 @@ import { Path } from "types";
 
 export const App = () => {
   const [path, setPath] = useState<Path>(window.location.pathname as Path);
+  const [selectedAd, setSelectedAd] = useState<number | undefined>();
 
   useEffect(() => {
     window.addEventListener("popstate", () => {
@@ -22,7 +23,11 @@ export const App = () => {
     <ThemeProvider>
       <ToasterProvider>
         {(path === "/client" || path === "/admin") && (
-          <TablesPage path={path} />
+          <TablesPage
+            path={path}
+            selectedAd={selectedAd}
+            setSelectedAd={setSelectedAd}
+          />
         )}
         {path === "/reports" && <ReportsPage />}
         {path === "/" && (

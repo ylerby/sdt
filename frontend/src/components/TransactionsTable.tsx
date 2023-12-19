@@ -11,37 +11,48 @@ import {
   TableActionConfig,
 } from "@gravity-ui/uikit";
 import { toaster } from "@gravity-ui/uikit/toaster-singleton";
-import { ADS_COLUMNS, CREATE_COLUMNS, MAP, REVERSE_MAP } from "./../constants";
-import { Draft, GetResponse, RealEstate } from "types";
+import {
+  TRANSACTIONS_COLUMNS,
+  MAP,
+  clients,
+  agents,
+  TRANSACTION_CREATE_COLUMNS,
+  REVERSE_MAP,
+} from "../constants";
+import { Draft, GetResponseTransaction, Transaction } from "types";
 
-const Table = withTableActions<RealEstate>(_Table);
+const Table = withTableActions<Transaction>(_Table);
 const ACTION_SIZE = "l";
 
-interface TransactionsTableProps {}
+interface TransactionsTableProps {
+  selectedAd?: number;
+}
 
-// SELECT
-//     t.price AS transaction_price,
-//     t.transaction_date,
-//     CONCAT(c.first_name, ' ', c.patronymic, ' ', c.last_name) AS client_full_name,
-//     CONCAT(a.first_name, ' ', a.patronymic, ' ', a.last_name) AS agent_full_name,
-//     dt.deal_type_name,
-//     at2.accommodation_type_name,
-//     t.transaction_date
+const getPersonFullName = ({
+  first_name,
+  patronymic,
+  last_name,
+}: {
+  first_name: string;
+  patronymic: string;
+  last_name: string;
+}) => {
+  return `${first_name} ${patronymic} ${last_name}`;
+};
 
-export const TransactionsTable = (props: TransactionsTableProps) => {
-  const [textFilter, setTextFilter] = useState("");
-  const [data, setData] = useState<RealEstate[]>([]);
+export const TransactionsTable = ({ selectedAd }: TransactionsTableProps) => {
+  const [data, setData] = useState<Transaction[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogMode, setDialogMode] = useState("create");
   const [draft, setDraft] = useState<Draft[]>(
-    new Array(CREATE_COLUMNS.length)
+    new Array(TRANSACTION_CREATE_COLUMNS.length)
       .fill({})
-      .map((val, ind) => ({ val: "", id: CREATE_COLUMNS[ind].id }))
+      .map((val, ind) => ({ val: "", id: TRANSACTION_CREATE_COLUMNS[ind].id }))
   );
   const [filters, setFilters] = useState<Record<string, string | number>>({});
 
   const filterFields = useCallback(
-    (fields: RealEstate[]) => {
+    (fields: Transaction[]) => {
       if (
         Object.values(filters).every(
           (filter) => filter === undefined || !String(filter)
@@ -68,78 +79,67 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
   );
 
   const setFilteredData = useCallback(
-    (data: RealEstate[]) => {
+    (data: Transaction[]) => {
       const filteredFields = filterFields(data);
       setData(filteredFields);
     },
     [filterFields]
   );
 
-  const getElements = useCallback((callback: (res: GetResponse) => void) => {
-    fetch("/get/estate", { method: "GET" })
-      .then((res) => res.json())
-      .then((res) => {
-        callback(res);
-      })
-      .catch((res) =>
-        toaster.add({
-          name: Math.random().toString(),
-          content: res?.ResponseError,
-          type: "error",
-          autoHiding: 2000,
+  const getElements = useCallback(
+    (callback: (res: GetResponseTransaction) => void) => {
+      fetch("/get/transaction", { method: "GET" })
+        .then((res) => res.json())
+        .then((res) => {
+          callback(res);
         })
-      );
-  }, []);
+        .catch((res) =>
+          toaster.add({
+            name: Math.random().toString(),
+            content: res?.ResponseError,
+            type: "error",
+            autoHiding: 2000,
+          })
+        );
+    },
+    []
+  );
 
   useEffect(() => {
     getElements((res) => setFilteredData(res.Data));
   }, [filters, getElements, setFilteredData]);
 
-  const onTextFilterUpdate = (value: string) => {
-    setTextFilter(value);
-    const [street = "", houseNumber = ""] = value
-      .split(",")
-      .map((el) => el.trim() ?? "");
-    getElements((res: GetResponse) => {
-      const filteredFields = filterFields(res.Data);
-      if (value === "") {
-        setFilteredData(filteredFields);
-        return;
-      }
-
-      setFilteredData(
-        filteredFields.filter((el) => {
-          return (
-            el.Street.includes(street) && el.HouseNumber.includes(houseNumber)
-          );
-        })
-      );
-    });
-  };
-
   const [editRealStateId, setEditRealStateId] = useState<number>(0);
 
-  const onDialogOpen = useCallback(() => {
-    setIsDialogOpen(true);
-  }, []);
+  const onDialogOpen = useCallback(
+    (mode?: string) => {
+      if (selectedAd === undefined && mode !== "edit") {
+        toaster.add({
+          name: Math.random().toString(),
+          content: "Выберите объявление для создания транзакции",
+          type: "error",
+          autoHiding: 2000,
+        });
+        return;
+      }
+      setIsDialogOpen(true);
+    },
+    [selectedAd]
+  );
 
   const getRowActions = (
-    item: RealEstate,
+    item: Transaction,
     ind: number
-  ): TableActionConfig<RealEstate>[] => {
+  ): TableActionConfig<Transaction>[] => {
     return [
       {
         text: "Редактировать",
-        handler: (ad: RealEstate, ind: number) => {
-          setEditRealStateId(ad.RealEstateID);
+        handler: (ad: Transaction, ind: number) => {
+          console.log(ad);
+          setEditRealStateId(ad.TransactionID);
           setDraft((drafts) =>
             drafts.map((el) => {
-              const val =
-                el.id === "Accommodation"
-                  ? MAP["Accommodation"][ad.Accommodation as number]
-                  : el.id === "DealType"
-                  ? MAP["DealType"][ad.DealType as number]
-                  : ad[el.id as keyof typeof ad];
+              const val = ad[el.id as keyof typeof ad];
 
               return {
                 ...el,
@@ -148,13 +148,13 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
             })
           );
           setDialogMode("edit");
-          onDialogOpen();
+          onDialogOpen("edit");
         },
       },
       {
         text: "Удалить",
-        handler: ({ RealEstateID: ID }: RealEstate) => {
-          fetch("/delete/estate", {
+        handler: ({ TransactionID: ID }: Transaction) => {
+          fetch("/delete/transaction", {
             method: "DELETE",
             body: JSON.stringify({ ID }),
           })
@@ -162,7 +162,7 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
               getElements((res) => setFilteredData(res.Data));
               toaster.add({
                 name: Math.random().toString(),
-                content: "Объявление удалено",
+                content: "Транзакция удалена",
                 type: "success",
                 autoHiding: 2000,
               });
@@ -182,14 +182,15 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
   };
 
   useEffect(() => {
-    getElements((res: GetResponse) => setFilteredData(res.Data));
+    getElements((res: GetResponseTransaction) => setFilteredData(res.Data));
   }, [getElements, setFilteredData]);
 
   const resetDraft = () => {
     setDraft(
-      new Array(CREATE_COLUMNS.length)
-        .fill({})
-        .map((val, ind) => ({ val: "", id: CREATE_COLUMNS[ind].id }))
+      new Array(TRANSACTION_CREATE_COLUMNS.length).fill({}).map((val, ind) => ({
+        val: "",
+        id: TRANSACTION_CREATE_COLUMNS[ind].id,
+      }))
     );
   };
   const onChangeDraft = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -225,6 +226,9 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
   };
 
   const onCreate = () => {
+    if (selectedAd === undefined && dialogMode === "create") {
+      return;
+    }
     const negativeFields: string[] = [];
     draft.forEach((el) => {
       if (typeof el.val === "number" && el.val < 0) {
@@ -243,11 +247,7 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
       return;
     }
 
-    draft.forEach((el) => {
-      if (String(el.val).length === 0) {
-        console.log(el);
-      }
-    });
+    console.log(draft);
 
     if (draft.some((el) => String(el.val).length === 0)) {
       toaster.add({
@@ -259,20 +259,30 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
       return;
     }
 
-    const body: Record<string, string | number> = {};
+    const getAgentId = (agent: string) => {
+      return agents.find((el) => getPersonFullName(el) === agent)
+        ?.agent_id as number;
+    };
+
+    const getClientId = (agent: string) => {
+      return clients.find((el) => getPersonFullName(el) === agent)
+        ?.client_id as number;
+    };
+
+    const preBody: Record<string, string | number> = {};
     draft.forEach((el) => {
-      body[el.id] = el.val;
-
-      if (el.id === "Accommodation") {
-        body[el.id] = REVERSE_MAP["Accommodation"][el.val];
-      }
-
-      if (el.id === "DealType") {
-        body[el.id] = REVERSE_MAP["DealType"][el.val];
-      }
+      preBody[el.id] = el.val;
     });
+    const body = {
+      Price: preBody.TransactionPrice,
+      DealType: REVERSE_MAP["DealType"][preBody.DealTypeName],
+      RealEstates: dialogMode === "create" ? selectedAd : editRealStateId,
+      Agent: getAgentId(preBody.AgentFullName as string),
+      Client: getClientId(preBody.ClientFullName as string),
+    };
+
     if (dialogMode === "create") {
-      fetch("/create/estate", {
+      fetch("/create/transaction", {
         method: "POST",
         body: JSON.stringify(body),
       })
@@ -280,7 +290,7 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
           getElements((res) => setFilteredData(res.Data));
           toaster.add({
             name: Math.random().toString(),
-            content: "Объявление создано",
+            content: "Транзакция создана",
             type: "success",
             autoHiding: 2000,
           });
@@ -295,7 +305,7 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
           })
         );
     } else {
-      fetch("/update/estate", {
+      fetch("/update/transaction", {
         method: "PUT",
         body: JSON.stringify({ ...body, ID: editRealStateId }),
       })
@@ -303,7 +313,7 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
           getElements((res) => setFilteredData(res.Data));
           toaster.add({
             name: Math.random().toString(),
-            content: "Объявление отредактировано",
+            content: "Транзакция отредактирована",
             type: "success",
             autoHiding: 2000,
           });
@@ -320,16 +330,27 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
     }
   };
 
-  const DealType_OPTIONS = Object.values(MAP.DealType).map((type) => ({
-    value: type,
-    content: type,
-  }));
   const Accommodation_OPTIONS = Object.values(MAP.Accommodation).map(
     (type) => ({ value: type, content: type })
   );
 
+  const CLIENT_OPTIONS = clients
+    .map((agent) => getPersonFullName(agent))
+    .sort()
+    .map((type) => ({ value: type, content: type }));
+
+  const AGENTS_OPTIONS = agents
+    .map((agent) => getPersonFullName(agent))
+    .sort()
+    .map((type) => ({ value: type, content: type }));
+
+  const DealType_OPTIONS = Object.values(MAP.DealType).map((type) => ({
+    value: type,
+    content: type,
+  }));
+
   const getName = (id: string) => {
-    const column = ADS_COLUMNS.find((column) => column.id === id);
+    const column = TRANSACTIONS_COLUMNS.find((column) => column.id === id);
     return column?.name ?? "";
   };
 
@@ -343,17 +364,68 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
     <>
       <Flex direction="column" gap={2}>
         <Flex gap={2} alignItems="center">
-          <TextInput
-            placeholder="Поиск..."
+          <Select
             size={ACTION_SIZE}
-            value={textFilter}
-            onUpdate={onTextFilterUpdate}
+            placeholder={getName("AccommodationTypeName")}
+            options={Accommodation_OPTIONS}
+            onUpdate={(values) =>
+              setFilters((prev) => ({
+                ...prev,
+                AccommodationTypeName: values[0],
+              }))
+            }
+            hasClear
           />
+          <Select
+            size={ACTION_SIZE}
+            placeholder={getName("DealTypeName")}
+            options={DealType_OPTIONS}
+            onUpdate={(values) => {
+              setFilters((prev) => ({
+                ...prev,
+                DealTypeName: values[0],
+              }));
+            }}
+            hasClear
+          />
+          <Select
+            placeholder={getName("AgentFullName")}
+            width="max"
+            options={AGENTS_OPTIONS}
+            onUpdate={(values) =>
+              setFilters((prev) => ({
+                ...prev,
+                AgentFullName: values[0],
+              }))
+            }
+            size={ACTION_SIZE}
+            hasClear
+          />
+          <Select
+            placeholder={getName("ClientFullName")}
+            width="max"
+            options={CLIENT_OPTIONS}
+            onUpdate={(values) =>
+              setFilters((prev) => ({
+                ...prev,
+                ClientFullName: values[0],
+              }))
+            }
+            size={ACTION_SIZE}
+            hasClear
+          />
+          <Button
+            view="action"
+            size={ACTION_SIZE}
+            onClick={() => onDialogOpen("create")}
+          >
+            Создать транзакцию
+          </Button>
         </Flex>
         <Table
-          className="app__table"
+          className="app__table transaction__table"
           data={data.slice().reverse()}
-          columns={ADS_COLUMNS}
+          columns={TRANSACTIONS_COLUMNS}
           getRowActions={getRowActions}
         />
       </Flex>
@@ -366,90 +438,40 @@ export const TransactionsTable = (props: TransactionsTableProps) => {
         <Flex gap={4} direction="column">
           <Flex direction="column" gap={2}>
             <Flex alignItems="center" justifyContent="center">
-              <Text variant="header-1">Создание объявления</Text>
+              <Text variant="header-1">
+                {dialogMode === "create" ? "Создание" : "Редактирование"}{" "}
+                транзакции
+              </Text>
             </Flex>
-            <Select
-              label={getName("Accommodation")}
-              value={[getValue("Accommodation") as string]}
-              options={Accommodation_OPTIONS}
-              onUpdate={(values) => onUpdateSelect(values, "Accommodation")}
-            />
-            <Select
-              label={getName("DealType")}
-              value={[getValue("DealType") as string]}
-              options={DealType_OPTIONS}
-              onUpdate={(values) => onUpdateSelect(values, "DealType")}
-            />
-            <TextInput
-              label={getName("ApartmentNumber")}
-              id="ApartmentNumber"
-              value={String(getValue("ApartmentNumber"))}
-              onChange={onChangeDraft}
-              type="number"
-            />
-            <TextInput
-              label={getName("District")}
-              id="District"
-              value={String(getValue("District"))}
-              onChange={onChangeDraft}
-            />
-            <TextInput
-              label={getName("Floor")}
-              id="Floor"
-              value={String(getValue("Floor"))}
-              onChange={onChangeDraft}
-              type="number"
-            />
-            <TextInput
-              label={getName("FloorsCount")}
-              id="FloorsCount"
-              value={String(getValue("FloorsCount"))}
-              onChange={onChangeDraft}
-              type="number"
-            />
-            <TextInput
-              label={getName("HouseNumber")}
-              id="HouseNumber"
-              value={String(getValue("HouseNumber"))}
-              onChange={onChangeDraft}
-            />
-            <TextInput
-              label={getName("Metro")}
-              id="Metro"
-              value={String(getValue("Metro"))}
-              onChange={onChangeDraft}
-            />
-            <TextInput
-              label={getName("RoomsCount")}
-              id="RoomsCount"
-              value={String(getValue("RoomsCount"))}
-              onChange={onChangeDraft}
-              type="number"
-            />
-            <TextInput
-              label={getName("Street")}
-              id="Street"
-              value={String(getValue("Street"))}
-              onChange={onChangeDraft}
-            />
-            <TextInput
-              label={getName("TotalMeters")}
-              id="TotalMeters"
-              value={String(getValue("TotalMeters"))}
-              onChange={onChangeDraft}
-              type="number"
-            />
-            <TextInput
-              label={getName("Price")}
-              id="Price"
-              value={String(getValue("Price"))}
-              onChange={onChangeDraft}
-              type="number"
-            />
           </Flex>
+          <Select
+            label={getName("DealTypeName")}
+            value={[getValue("DealTypeName") as string]}
+            options={DealType_OPTIONS}
+            onUpdate={(values) => onUpdateSelect(values, "DealTypeName")}
+          />
+          <Select
+            label={getName("AgentFullName")}
+            value={[getValue("AgentFullName") as string]}
+            options={AGENTS_OPTIONS}
+            onUpdate={(values) => onUpdateSelect(values, "AgentFullName")}
+          />
+          <Select
+            label={getName("ClientFullName")}
+            value={[getValue("ClientFullName") as string]}
+            options={CLIENT_OPTIONS}
+            onUpdate={(values) => onUpdateSelect(values, "ClientFullName")}
+          />
+          <TextInput
+            label={getName("TransactionPrice")}
+            id="TransactionPrice"
+            value={String(getValue("TransactionPrice"))}
+            onChange={onChangeDraft}
+            type="number"
+          />
           <Flex justifyContent="flex-end">
             <Button view="action" onClick={onCreate}>
-              Редактировать
+              {dialogMode === "create" ? "Создать" : "Редактировать"}
             </Button>
           </Flex>
         </Flex>

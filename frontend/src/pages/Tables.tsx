@@ -6,9 +6,15 @@ import { TransactionsTable } from "components/TransactionsTable";
 
 interface TablesPageProps {
   path: Path;
+  selectedAd?: number;
+  setSelectedAd: (id: number | undefined) => void;
 }
 
-export const TablesPage = ({ path: mode }: TablesPageProps) => {
+export const TablesPage = ({
+  path: mode,
+  selectedAd,
+  setSelectedAd,
+}: TablesPageProps) => {
   const [activeTab, setActiveTab] = useState("Объявления");
 
   return (
@@ -23,8 +29,16 @@ export const TablesPage = ({ path: mode }: TablesPageProps) => {
           onSelectTab={(tabId) => setActiveTab(tabId)}
         />
       )}
-      {activeTab === "Объявления" && <AdsTable path={mode} />}
-      {activeTab === "Транзакции" && <TransactionsTable />}
+      {activeTab === "Объявления" && (
+        <AdsTable
+          path={mode}
+          setSelectedAd={setSelectedAd}
+          selectedAd={selectedAd}
+        />
+      )}
+      {activeTab === "Транзакции" && (
+        <TransactionsTable selectedAd={selectedAd} />
+      )}
     </Flex>
   );
 };
