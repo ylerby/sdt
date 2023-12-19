@@ -15,7 +15,6 @@ func (a *App) GetTransactionHandler(w http.ResponseWriter, r *http.Request) {
 	convertResult := make([]responses.ConvertTransactionRecordsResult, len(result))
 
 	for index := range result {
-		// todo: нужен ли TransactionId на фронте?
 		convertResult[index].TransactionId = result[index].TransactionId
 		convertResult[index].TransactionDate = result[index].TransactionDate
 		convertResult[index].TransactionPrice = result[index].TransactionPrice
@@ -64,6 +63,15 @@ func (a *App) CreateTransactionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	a.Database.CreateTransactionRecord(currentRequestBody)
+	res, err := json.Marshal(schemas.Response{
+		Data:          "Запись успешно добавлена",
+		ResponseError: "",
+	})
+	_, err = w.Write(res)
+	if err != nil {
+		log.Printf("Ошибка при ответе %s", err)
+		return
+	}
 }
 
 func (a *App) UpdateTransactionHandler(w http.ResponseWriter, r *http.Request) {
@@ -96,6 +104,7 @@ func (a *App) UpdateTransactionHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = w.Write(res)
 	if err != nil {
 		log.Printf("Ошибка при ответе %s", err)
+		return
 	}
 }
 
@@ -129,5 +138,6 @@ func (a *App) DeleteTransactionHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = w.Write(res)
 	if err != nil {
 		log.Printf("Ошибка при ответе %s", err)
+		return
 	}
 }

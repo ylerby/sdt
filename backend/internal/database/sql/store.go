@@ -14,6 +14,7 @@ type DbInterface interface {
 	Connect() error
 	DbEstateInterface
 	DbTransactionInterface
+	DbRecordInterface
 }
 
 type DbEstateInterface interface {
@@ -28,4 +29,16 @@ type DbTransactionInterface interface {
 	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
 	UpdateTransactionRecord(requestBody requests.UpdateTransactionRequestBody)
 	DeleteTransactionRecord(id int)
+}
+
+type DbRecordInterface interface {
+	GetMostProfitableSale(body requests.MostProfitableSaleRequestBody) []responses.GetMostProfitableSaleResult
+	GetLeastProfitableSale()
+	GetMostProfitableRental()
+	GetLeastProfitableRental()
+	GetRealtorsRecord()
+	GetDynamics()
+	GetAveragePrice()
+	GetRecordCount()
+	GetTopAgents()
 }

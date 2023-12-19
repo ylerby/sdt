@@ -54,3 +54,10 @@ type UpdateTransactionRequestBody struct {
 type DeleteTransactionRequestBody struct {
 	ID int `json:"id"`
 }
+
+type MostProfitableSaleRequestBody struct {
+	FirstDate    string `json:"FirstDate"`
+	SecondDate   string `json:"SecondDate"`
+	DealTypeName string `json:"DealTypeName"`
+	SortField    string `json:"Sort"`
+}
