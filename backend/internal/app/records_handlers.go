@@ -93,7 +93,27 @@ func (a *App) AgentRecordHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) DynamicsHandler(w http.ResponseWriter, r *http.Request) {
-	result := a.Database.GetDynamics()
+	result := a.Database.GetDynamicsRecord()
+
+	res, err := json.Marshal(schemas.Response{
+		Data:          result,
+		ResponseError: "",
+	})
+
+	if err != nil {
+		log.Printf("Ошибка при сериализации объекта %s", err)
+		return
+	}
+
+	_, err = w.Write(res)
+	if err != nil {
+		log.Printf("Ошибка при ответе %s", err)
+		return
+	}
+}
+
+func (a *App) AverageHandler(w http.ResponseWriter, r *http.Request) {
+	result := a.Database.GetAverageRecord()
 
 	res, err := json.Marshal(schemas.Response{
 		Data:          result,

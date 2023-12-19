@@ -12,7 +12,7 @@ import (
 func (a *App) GetTransactionHandler(w http.ResponseWriter, r *http.Request) {
 	result := a.Database.GetTransactionRecords()
 
-	convertResult := make([]responses.ConvertTransactionRecordsResult, len(result))
+	convertResult := make([]responses.ConvertTransactionRecordResult, len(result))
 
 	for index := range result {
 		convertResult[index].TransactionId = result[index].TransactionId

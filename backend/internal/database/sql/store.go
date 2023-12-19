@@ -18,22 +18,22 @@ type DbInterface interface {
 }
 
 type DbEstateInterface interface {
-	GetEstateRecords() []responses.GetEstateRecordsResult
+	GetEstateRecords() []responses.GetEstateRecordResult
 	CreateEstateRecord(requestBody requests.CreateEstateRequestBody)
 	UpdateEstateRecord(requestBody requests.UpdateEstateRequestBody)
 	DeleteEstateRecord(id int)
 }
 
 type DbTransactionInterface interface {
-	GetTransactionRecords() []responses.GetTransactionRecordsResult
+	GetTransactionRecords() []responses.GetTransactionRecordResult
 	CreateTransactionRecord(requestBody requests.CreateTransactionBody)
 }
 
 type DbRecordInterface interface {
 	GetProfitableRecord(body requests.ProfitableRecordRequestBody) []responses.GetProfitableRecordResult
 	GetAgentRecord(body requests.AgentRecordRequestBody) []responses.GetAgentRecordResult
-	GetDynamics() []responses.GetDynamicsRecordResult
-	GetAveragePrice()
+	GetDynamicsRecord() []responses.GetDynamicsRecordResult
+	GetAverageRecord() []responses.GetAverageRecordResult
 	GetRecordCount()
 	GetTopAgents()
 }

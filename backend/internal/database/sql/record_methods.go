@@ -34,7 +34,7 @@ func (d *Database) GetAgentRecord(requestBody requests.AgentRecordRequestBody) [
 	return result
 }
 
-func (d *Database) GetDynamics() []responses.GetDynamicsRecordResult {
+func (d *Database) GetDynamicsRecord() []responses.GetDynamicsRecordResult {
 	var result []responses.GetDynamicsRecordResult
 	d.db.Raw("SELECT " +
 		"transaction_date, " +
@@ -43,7 +43,12 @@ func (d *Database) GetDynamics() []responses.GetDynamicsRecordResult {
 	return result
 }
 
-func (d *Database) GetAveragePrice() {}
+func (d *Database) GetAverageRecord() []responses.GetAverageRecordResult {
+	var result []responses.GetAverageRecordResult
+	d.db.Raw("SELECT district, AVG(price / total_meters) AS avg_price_per_sqm " +
+		"FROM real_estates GROUP BY district ORDER BY avg_price_per_sqm DESC;").Scan(&result)
+	return result
+}
 
 func (d *Database) GetRecordCount() {}
 

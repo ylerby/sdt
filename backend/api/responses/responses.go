@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-type GetEstateRecordsResult struct {
+type GetEstateRecordResult struct {
 	model.RealEstate
 	model.DealType
 	model.AccommodationType
 }
 
-type GetTransactionRecordsResult struct {
+type GetTransactionRecordResult struct {
 	gorm.Model
 	TransactionId         int       `gorm:"column:id"`
 	TransactionPrice      float64   `gorm:"column:transaction_price"`
@@ -23,7 +23,7 @@ type GetTransactionRecordsResult struct {
 	AccommodationTypeName string    `gorm:"column:accommodation_type_name"`
 }
 
-type ConvertTransactionRecordsResult struct {
+type ConvertTransactionRecordResult struct {
 	TransactionId         int
 	TransactionPrice      float64
 	TransactionDate       time.Time
@@ -61,4 +61,9 @@ type GetAgentRecordResult struct {
 type GetDynamicsRecordResult struct {
 	NumberOfTransaction int       `gorm:"column:number_of_transactions"`
 	TransactionDate     time.Time `gorm:"column:transaction_date"`
+}
+
+type GetAverageRecordResult struct {
+	AveragePrice float64 `gorm:"column:avg_price_per_sqm"`
+	District     string  `gorm:"column:district"`
 }

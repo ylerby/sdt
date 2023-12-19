@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-func (d *Database) GetTransactionRecords() []responses.GetTransactionRecordsResult {
-	var result []responses.GetTransactionRecordsResult
+func (d *Database) GetTransactionRecords() []responses.GetTransactionRecordResult {
+	var result []responses.GetTransactionRecordResult
 	d.db.Raw("SELECT " +
 		"t.id, t.price AS transaction_price, t.transaction_date, " +
 		"CONCAT(c.first_name, ' ', c.patronymic, ' ', c.last_name) AS client_full_name, " +
