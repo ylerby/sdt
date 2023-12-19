@@ -91,3 +91,23 @@ func (a *App) AgentRecordHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func (a *App) DynamicsHandler(w http.ResponseWriter, r *http.Request) {
+	result := a.Database.GetDynamics()
+
+	res, err := json.Marshal(schemas.Response{
+		Data:          result,
+		ResponseError: "",
+	})
+
+	if err != nil {
+		log.Printf("Ошибка при сериализации объекта %s", err)
+		return
+	}
+
+	_, err = w.Write(res)
+	if err != nil {
+		log.Printf("Ошибка при ответе %s", err)
+		return
+	}
+}

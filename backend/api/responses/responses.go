@@ -57,3 +57,8 @@ type GetAgentRecordResult struct {
 	TransactionNumber int     `gorm:"column:number_of_transactions"`
 	AveragePrice      float64 `gorm:"column:average_price"`
 }
+
+type GetDynamicsRecordResult struct {
+	NumberOfTransaction int       `gorm:"column:number_of_transactions"`
+	TransactionDate     time.Time `gorm:"column:transaction_date"`
+}

@@ -32,7 +32,7 @@ type DbTransactionInterface interface {
 type DbRecordInterface interface {
 	GetProfitableRecord(body requests.ProfitableRecordRequestBody) []responses.GetProfitableRecordResult
 	GetAgentRecord(body requests.AgentRecordRequestBody) []responses.GetAgentRecordResult
-	GetDynamics()
+	GetDynamics() []responses.GetDynamicsRecordResult
 	GetAveragePrice()
 	GetRecordCount()
 	GetTopAgents()

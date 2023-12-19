@@ -34,7 +34,14 @@ func (d *Database) GetAgentRecord(requestBody requests.AgentRecordRequestBody) [
 	return result
 }
 
-func (d *Database) GetDynamics() {}
+func (d *Database) GetDynamics() []responses.GetDynamicsRecordResult {
+	var result []responses.GetDynamicsRecordResult
+	d.db.Raw("SELECT " +
+		"transaction_date, " +
+		"COUNT(id) AS number_of_transactions " +
+		"FROM transactions GROUP BY transaction_date ORDER BY transaction_date;").Scan(&result)
+	return result
+}
 
 func (d *Database) GetAveragePrice() {}
 
