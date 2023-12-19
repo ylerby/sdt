@@ -43,7 +43,8 @@ func (a *App) StartApp() {
 	http.HandleFunc("/update/transaction", a.UpdateTransactionHandler)
 	http.HandleFunc("/delete/transaction", a.DeleteTransactionHandler)
 
-	http.HandleFunc("/record/most_profitable", a.MostProfitableSaleHandler)
+	http.HandleFunc("/record/profitable", a.ProfitableRecordHandler)
+	http.HandleFunc("/record/agent_record", a.AgentRecordHandler)
 
 	err = a.Server.ListenAndServe()
 }

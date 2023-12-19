@@ -32,10 +32,7 @@ type DbTransactionInterface interface {
 }
 
 type DbRecordInterface interface {
-	GetMostProfitableSale(body requests.MostProfitableSaleRequestBody) []responses.GetMostProfitableSaleResult
-	GetLeastProfitableSale()
-	GetMostProfitableRental()
-	GetLeastProfitableRental()
+	GetProfitableRecord(body requests.ProfitableRecordRequestBody) []responses.GetProfitableRecordResult
 	GetRealtorsRecord()
 	GetDynamics()
 	GetAveragePrice()

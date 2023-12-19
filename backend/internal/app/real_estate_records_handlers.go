@@ -8,8 +8,8 @@ import (
 	"net/http"
 )
 
-func (a *App) MostProfitableSaleHandler(w http.ResponseWriter, r *http.Request) {
-	var currentRequestBody requests.MostProfitableSaleRequestBody
+func (a *App) ProfitableRecordHandler(w http.ResponseWriter, r *http.Request) {
+	var currentRequestBody requests.ProfitableRecordRequestBody
 
 	err := json.NewDecoder(r.Body).Decode(&currentRequestBody)
 	if err != nil {
@@ -31,7 +31,7 @@ func (a *App) MostProfitableSaleHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	result := a.Database.GetMostProfitableSale(currentRequestBody)
+	result := a.Database.GetProfitableRecord(currentRequestBody)
 
 	res, err := json.Marshal(schemas.Response{
 		Data:          result,
@@ -48,4 +48,8 @@ func (a *App) MostProfitableSaleHandler(w http.ResponseWriter, r *http.Request) 
 		log.Printf("Ошибка при ответе %s", err)
 		return
 	}
+}
+
+func (a *App) AgentRecordHandler(w http.ResponseWriter, r *http.Request) {
+
 }

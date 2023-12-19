@@ -6,8 +6,8 @@ import (
 	"fmt"
 )
 
-func (d *Database) GetMostProfitableSale(requestBody requests.MostProfitableSaleRequestBody) []responses.GetMostProfitableSaleResult {
-	var result []responses.GetMostProfitableSaleResult
+func (d *Database) GetProfitableRecord(requestBody requests.ProfitableRecordRequestBody) []responses.GetProfitableRecordResult {
+	var result []responses.GetProfitableRecordResult
 	d.db.Raw(fmt.Sprintf("SELECT t.id, t.price AS transaction_price, t.transaction_date, "+
 		"CONCAT(c.first_name, ' ', c.patronymic, ' ', c.last_name) AS client_full_name, "+
 		"CONCAT(a.first_name, ' ', a.patronymic, ' ', a.last_name) AS agent_full_name, "+
@@ -21,12 +21,6 @@ func (d *Database) GetMostProfitableSale(requestBody requests.MostProfitableSale
 		requestBody.FirstDate, requestBody.SecondDate, requestBody.DealTypeName, requestBody.SortField)).Scan(&result)
 	return result
 }
-
-func (d *Database) GetLeastProfitableSale() {}
-
-func (d *Database) GetMostProfitableRental() {}
-
-func (d *Database) GetLeastProfitableRental() {}
 
 func (d *Database) GetRealtorsRecord() {}
 

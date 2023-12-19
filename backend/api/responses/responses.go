@@ -33,7 +33,7 @@ type ConvertTransactionRecordsResult struct {
 	AccommodationTypeName string
 }
 
-type GetMostProfitableSaleResult struct {
+type GetProfitableRecordResult struct {
 	TransactionId    int       `gorm:"column:id"`
 	TransactionPrice float64   `gorm:"column:transaction_price"`
 	TransactionDate  time.Time `gorm:"column:transaction_date"`
