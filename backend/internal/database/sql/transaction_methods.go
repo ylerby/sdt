@@ -36,11 +36,3 @@ func (d *Database) CreateTransactionRecord(requestBody requests.CreateTransactio
 
 	d.db.Create(&currentRecordModel)
 }
-
-func (d *Database) UpdateTransactionRecord(requestBody requests.UpdateTransactionRequestBody) {
-
-}
-
-func (d *Database) DeleteTransactionRecord(id int) {
-
-}

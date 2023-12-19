@@ -43,18 +43,6 @@ type CreateTransactionBody struct {
 	Client      int     `json:"Client"`
 }
 
-type UpdateTransactionRequestBody struct {
-	Price       float64 `json:"Price"`
-	DealType    int     `json:"DealType"`
-	RealEstates int     `json:"RealEstates"`
-	Agent       int     `json:"Agent"`
-	Client      int     `json:"Client"`
-}
-
-type DeleteTransactionRequestBody struct {
-	ID int `json:"id"`
-}
-
 type ProfitableRecordRequestBody struct {
 	FirstDate    string `json:"FirstDate"`
 	SecondDate   string `json:"SecondDate"`

@@ -40,8 +40,6 @@ func (a *App) StartApp() {
 
 	http.HandleFunc("/get/transaction", a.GetTransactionHandler)
 	http.HandleFunc("/create/transaction", a.CreateTransactionHandler)
-	http.HandleFunc("/update/transaction", a.UpdateTransactionHandler)
-	http.HandleFunc("/delete/transaction", a.DeleteTransactionHandler)
 
 	http.HandleFunc("/record/profitable", a.ProfitableRecordHandler)
 	http.HandleFunc("/record/agent_record", a.AgentRecordHandler)
