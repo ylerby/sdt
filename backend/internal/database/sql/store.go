@@ -35,5 +35,5 @@ type DbRecordInterface interface {
 	GetDynamicsRecord() []responses.GetDynamicsRecordResult
 	GetAverageRecord() []responses.GetAverageRecordResult
 	GetRecordCount()
-	GetTopAgents()
+	GetTopAgentsRecord() []responses.GetTopAgentsRecordResult
 }

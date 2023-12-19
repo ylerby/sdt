@@ -52,4 +52,12 @@ func (d *Database) GetAverageRecord() []responses.GetAverageRecordResult {
 
 func (d *Database) GetRecordCount() {}
 
-func (d *Database) GetTopAgents() {}
+func (d *Database) GetTopAgentsRecord() []responses.GetTopAgentsRecordResult {
+	var result []responses.GetTopAgentsRecordResult
+	d.db.Raw("SELECT " +
+		"a.agent_id, CONCAT(a.first_name, ' ', a.last_name) AS agent_full_name, " +
+		"COUNT(id) AS number_of_transactions FROM transactions " +
+		"JOIN agents a ON transactions.agent_id = a.agent_id GROUP BY " +
+		"a.agent_id, agent_full_name ORDER BY number_of_transactions DESC LIMIT 5;").Scan(&result)
+	return result
+}

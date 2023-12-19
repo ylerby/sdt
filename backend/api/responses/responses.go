@@ -67,3 +67,8 @@ type GetAverageRecordResult struct {
 	AveragePrice float64 `gorm:"column:avg_price_per_sqm"`
 	District     string  `gorm:"column:district"`
 }
+
+type GetTopAgentsRecordResult struct {
+	FullName            string `gorm:"column:agent_full_name"`
+	NumberOfTransaction int    `gorm:"column:number_of_transactions"`
+}

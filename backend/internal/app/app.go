@@ -45,6 +45,7 @@ func (a *App) StartApp() {
 	http.HandleFunc("/record/agent_record", a.AgentRecordHandler)
 	http.HandleFunc("/record/dynamics", a.DynamicsHandler)
 	http.HandleFunc("/record/average", a.AverageHandler)
+	http.HandleFunc("/record/top_agents", a.TopAgentsHandler)
 
 	err = a.Server.ListenAndServe()
 }

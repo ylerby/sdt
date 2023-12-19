@@ -131,3 +131,23 @@ func (a *App) AverageHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func (a *App) TopAgentsHandler(w http.ResponseWriter, r *http.Request) {
+	result := a.Database.GetTopAgentsRecord()
+
+	res, err := json.Marshal(schemas.Response{
+		Data:          result,
+		ResponseError: "",
+	})
+
+	if err != nil {
+		log.Printf("Ошибка при сериализации объекта %s", err)
+		return
+	}
+
+	_, err = w.Write(res)
+	if err != nil {
+		log.Printf("Ошибка при ответе %s", err)
+		return
+	}
+}
