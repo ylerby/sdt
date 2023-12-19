@@ -45,6 +45,7 @@ func (a *App) StartApp() {
 
 	http.HandleFunc("/record/profitable", a.ProfitableRecordHandler)
 	http.HandleFunc("/record/agent_record", a.AgentRecordHandler)
+	//http.HandleFunc("/record")
 
 	err = a.Server.ListenAndServe()
 }

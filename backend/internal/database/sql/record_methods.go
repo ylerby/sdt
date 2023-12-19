@@ -22,7 +22,17 @@ func (d *Database) GetProfitableRecord(requestBody requests.ProfitableRecordRequ
 	return result
 }
 
-func (d *Database) GetRealtorsRecord() {}
+func (d *Database) GetAgentRecord(requestBody requests.AgentRecordRequestBody) []responses.GetAgentRecordResult {
+	var result []responses.GetAgentRecordResult
+	d.db.Raw(fmt.Sprintf("SELECT "+
+		"CONCAT(a.first_name, ' ', a.patronymic, ' ', a.last_name) AS agent_full_name, "+
+		"COUNT(t.id) AS number_of_transactions, AVG(t.price) AS average_price "+
+		"FROM transactions t JOIN agents a ON t.agent_id = a.agent_id "+
+		"WHERE t.transaction_date BETWEEN '%s' AND '%s' GROUP BY "+
+		"agent_full_name;",
+		requestBody.FirstDate, requestBody.SecondDate)).Scan(&result)
+	return result
+}
 
 func (d *Database) GetDynamics() {}
 

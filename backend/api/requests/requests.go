@@ -61,3 +61,8 @@ type ProfitableRecordRequestBody struct {
 	DealTypeName string `json:"DealTypeName"`
 	SortField    string `json:"Sort"`
 }
+
+type AgentRecordRequestBody struct {
+	FirstDate  string `json:"FirstDate"`
+	SecondDate string `json:"SecondDate"`
+}

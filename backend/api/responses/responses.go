@@ -51,3 +51,9 @@ type GetProfitableRecordResult struct {
 	ApartmentNumber  int       `gorm:"column:apartment_number"`
 	Metro            string    `gorm:"column:metro"`
 }
+
+type GetAgentRecordResult struct {
+	AgentFullName     string  `gorm:"column:agent_full_name"`
+	TransactionNumber int     `gorm:"column:number_of_transactions"`
+	AveragePrice      float64 `gorm:"column:average_price"`
+}
