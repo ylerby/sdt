@@ -1,0 +1,7 @@
+streamlit
+pandas
+seaborn 
+json
+catboost
+time
+random
