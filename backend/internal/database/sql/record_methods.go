@@ -50,7 +50,15 @@ func (d *Database) GetAverageRecord() []responses.GetAverageRecordResult {
 	return result
 }
 
-func (d *Database) GetRecordCount() {}
+func (d *Database) GetSalesCountRecord(requestBody requests.SalesCountRequestBody) []responses.GetSalesCountRecordResult {
+	var result []responses.GetSalesCountRecordResult
+	d.db.Raw(fmt.Sprintf("SELECT deal_type_name, COUNT(id) AS number_of_transactions, "+
+		"AVG(price) AS average_price FROM transactions "+
+		"JOIN deal_types ON transactions.deal_type_id = deal_types.deal_type_id WHERE "+
+		"transaction_date BETWEEN '%s' AND '%s' GROUP BY deal_type_name;",
+		requestBody.FirstDate, requestBody.SecondDate)).Scan(&result)
+	return result
+}
 
 func (d *Database) GetTopAgentsRecord() []responses.GetTopAgentsRecordResult {
 	var result []responses.GetTopAgentsRecordResult

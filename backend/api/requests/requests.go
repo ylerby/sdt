@@ -54,3 +54,8 @@ type AgentRecordRequestBody struct {
 	FirstDate  string `json:"FirstDate"`
 	SecondDate string `json:"SecondDate"`
 }
+
+type SalesCountRequestBody struct {
+	FirstDate  string `json:"FirstDate"`
+	SecondDate string `json:"SecondDate"`
+}

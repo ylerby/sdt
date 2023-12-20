@@ -33,11 +33,13 @@ func (a *App) StartApp() {
 
 	log.Println("успешное подключение к БД")
 
+	// crud объявлений
 	http.HandleFunc("/get/estate", a.GetEstateHandler)
 	http.HandleFunc("/create/estate", a.CreateEstateHandler)
 	http.HandleFunc("/update/estate", a.UpdateEstateHandler)
 	http.HandleFunc("/delete/estate", a.DeleteEstateHandler)
 
+	// получение и создание транзакций
 	http.HandleFunc("/get/transaction", a.GetTransactionHandler)
 	http.HandleFunc("/create/transaction", a.CreateTransactionHandler)
 
@@ -46,7 +48,7 @@ func (a *App) StartApp() {
 	http.HandleFunc("/record/dynamics", a.DynamicsHandler)
 	http.HandleFunc("/record/average", a.AverageHandler)
 	http.HandleFunc("/record/top_agents", a.TopAgentsHandler)
-
+	http.HandleFunc("/record/sales_count", a.SalesCountHandler)
 	err = a.Server.ListenAndServe()
 }
 

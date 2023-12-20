@@ -72,3 +72,9 @@ type GetTopAgentsRecordResult struct {
 	FullName            string `gorm:"column:agent_full_name"`
 	NumberOfTransaction int    `gorm:"column:number_of_transactions"`
 }
+
+type GetSalesCountRecordResult struct {
+	DealTypeName        string  `gorm:"column:deal_type_name;type:varchar"`
+	NumberOfTransaction int     `gorm:"column:number_of_transactions"`
+	AveragePrice        float64 `gorm:"column:average_price"`
+}
