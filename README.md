@@ -41,41 +41,41 @@ link: http://localhost:3000
 ```bash         
 ├── api
 │   ├── requests
-│   │   └── requests.go
+│   │   └── requests.go                    <- структуры запросов
 │   ├── responses
-│   │   └── responses.go        
+│   │   └── responses.go                   <- структуры ответов sql-запросов
 │   └── schemas     
-│       └── schemas.go         
+│       └── schemas.go                     <- структура ответа
 │
 │
 ├── cmd       
-│   └── main.go                   
+│   └── main.go                            <- запуск приложения          
 │
 ├── internal
 │   ├── app
-│   │   ├── app.go
-│   │   ├── estate_handlers.go
+│   │   ├── app.go                         <- запуск/завершение работы сервера, роутинг
+│   │   ├── estate_handlers.go             <- хендлеры 
 │   │   ├── records_handlers.go
 │   │   └── transaction_handlers.go
 │   │
 │   │
 │   ├── database
 │   │   └── sql
-│   │       ├── record_methods.go
+│   │       ├── sql.go                     <- подключение к базе данных 
+│   │       ├── store.go                   <- "storage" с необходимыми интерфейсами и структурами 
+│   │       ├── record_methods.go          <- методы взаимодействия с бд 
 │   │       ├── estate_methods.go
-│   │       ├── sql.go
-│   │       ├── store.go
 │   │       └── transaction_methods.go    
 │   │
 │   │
 │   │
 │   └── model
-│       ├── accomodation.go
+│       ├── accomodation.go                <- gorm-модели
 │       ├── agents.go
 │       ├── clients.go
 │       ├── deal.go
 │       ├── estate.go
 │       └── transactions.go
 │
-└── go.mod
+└── go.mod                                 <- файл с зависимостями 
 ```
