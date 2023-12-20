@@ -23,83 +23,17 @@ link: http://localhost:3000
   ```
 
 ## Предоставляемые методы:
-
-1. /get
-
-#### Формат ответа:
-
-```json
-{
-  "Data": [
-    {
-      "RealEstateID": 1,
-      "PublicationDate": "202305T00:00:00Z",
-      "DealType": 0,
-      "Accommodation": 0,
-      "Price": 16250000,
-      "Floor": 10,
-      "FloorsCount": 19,
-      "RoomsCount": 2,
-      "TotalMeters": 58.3,
-      "District": "Северный",
-      "Street": "Дмитровское шоссе",
-      "HouseNumber": "169К7",
-      "ApartmentNumber": 247,
-      "Metro": "Физтех",
-      "DealTypeID": 0,
-      "AccommodationTypeID": 0
-    }
-  ],
-  "ResponseError": ""
-}
 ```
-
-2. /delete/estate
-
-#### Формат запроса:
-
-```json
-{
-    "Street":"Ленинградский проспект",
-    "HouseNumber":"вл8",
-    "ApartmentNumber":433
-}
-```
-
-#### Формат ответа:
-
-```json
-{
-  "Data": "Запись успешно удалена",
-  "ResponseError": ""
-}
-```
-
-3. /create/estate
-
-#### Формат запроса:
-
-```json
-{
-  "AccommodationTypeId": 0,
-  "DealTypeId": 1,
-  "Floor": 6,
-  "FloorsCount": 12,
-  "RoomsCount": 2,
-  "TotalMeters": 43.3,
-  "District": "Nahabino",
-  "Street": "Yasnaya",
-  "HouseNumber": "21k1",
-  "ApartmentNumber": 12,
-  "Metro": "MCD Nahabino"
-}
-```
-
-#### Формат ответа:
-
-```json
-{
-  "Data": "успешное добавление записи",
-  "ResponseError": ""
-}
+1.	 /get/estate
+2.	 /create/estate
+3.	 /update/estate
+4.	 /delete/estate
+5.       /get/transaction
+6.       /create/transaction
+7.       /record/profitable
+8.       /record/agent_record
+9.       /record/dynamics
+10.      /record/average
+11.      /record/top_agents
+12.      /record/sales_count
 ```
