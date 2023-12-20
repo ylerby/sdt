@@ -23,16 +23,17 @@ link: http://localhost:3000
   ```
 
 ## Предоставляемые методы:
-
+```
 1.	 /get/estate
 2.	 /create/estate
 3.	 /update/estate
 4.	 /delete/estate
-5.   /get/transaction
-6.   /create/transaction
-7.   /record/profitable
-8.   /record/agent_record
-9.   /record/dynamics
-10.  /record/average
-11.  /record/top_agents
-12.  /record/sales_count
+5.       /get/transaction
+6.       /create/transaction
+7.       /record/profitable
+8.       /record/agent_record
+9.       /record/dynamics
+10.      /record/average
+11.      /record/top_agents
+12.      /record/sales_count
+```
