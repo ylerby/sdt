@@ -78,9 +78,18 @@ export const AdsTable = ({
   const setFilteredData = useCallback(
     (data: RealEstate[]) => {
       const filteredFields = filterFields(data);
-      setData(filteredFields);
+
+      const [street = "", houseNumber = ""] = textFilter
+        .split(",")
+        .map((el) => el.trim() ?? "");
+      const result = filteredFields.filter((el) => {
+        return (
+          el.Street.includes(street) && el.HouseNumber.includes(houseNumber)
+        );
+      });
+      setData(result);
     },
-    [filterFields]
+    [filterFields, textFilter]
   );
 
   const getElements = useCallback((callback: (res: GetResponse) => void) => {
