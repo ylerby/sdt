@@ -37,3 +37,45 @@ link: http://localhost:3000
 11.      /record/top_agents
 12.      /record/sales_count
 ```
+
+```bash         
+├── api
+│   ├── requests
+│   │   └── requests.go
+│   ├── responses
+│   │   └── responses.go        
+│   └── schemas     
+│       └── schemas.go         
+│
+│
+├── cmd       
+│   └── main.go                   
+│
+├── internal
+│   ├── app
+│   │   ├── app.go
+│   │   ├── estate_handlers.go
+│   │   ├── records_handlers.go
+│   │   └── transaction_handlers.go
+│   │
+│   │
+│   ├── database
+│   │   └── sql
+│   │       ├── record_methods.go
+│   │       ├── estate_methods.go
+│   │       ├── sql.go
+│   │       ├── store.go
+│   │       └── transaction_methods.go    
+│   │
+│   │
+│   │
+│   └── model
+│       ├── accomodation.go
+│       ├── agents.go
+│       ├── clients.go
+│       ├── deal.go
+│       ├── estate.go
+│       └── transactions.go
+│
+└── go.mod
+```
