@@ -8,7 +8,7 @@ import (
 
 func (d *Database) GetProfitableRecord(requestBody requests.ProfitableRecordRequestBody) []responses.GetProfitableRecordResult {
 	var result []responses.GetProfitableRecordResult
-	d.db.Raw(fmt.Sprintf("SELECT t.id, t.price AS transaction_price, t.transaction_date, "+
+	d.db.Raw(fmt.Sprintf("SELECT t.price AS transaction_price, t.transaction_date, "+
 		"CONCAT(c.first_name, ' ', c.patronymic, ' ', c.last_name) AS client_full_name, "+
 		"CONCAT(a.first_name, ' ', a.patronymic, ' ', a.last_name) AS agent_full_name, "+
 		"dt.deal_type_name, rt.publication_date, "+

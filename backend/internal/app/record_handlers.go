@@ -92,7 +92,7 @@ func (a *App) AgentRecordHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (a *App) DynamicsHandler(w http.ResponseWriter, r *http.Request) {
+func (a *App) DynamicsHandler(w http.ResponseWriter, _ *http.Request) {
 	result := a.Database.GetDynamicsRecord()
 
 	res, err := json.Marshal(schemas.Response{
@@ -112,7 +112,7 @@ func (a *App) DynamicsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (a *App) AverageHandler(w http.ResponseWriter, r *http.Request) {
+func (a *App) AverageHandler(w http.ResponseWriter, _ *http.Request) {
 	result := a.Database.GetAverageRecord()
 
 	res, err := json.Marshal(schemas.Response{
@@ -132,7 +132,7 @@ func (a *App) AverageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (a *App) TopAgentsHandler(w http.ResponseWriter, r *http.Request) {
+func (a *App) TopAgentsHandler(w http.ResponseWriter, _ *http.Request) {
 	result := a.Database.GetTopAgentsRecord()
 
 	res, err := json.Marshal(schemas.Response{

@@ -34,7 +34,6 @@ type ConvertTransactionRecordResult struct {
 }
 
 type GetProfitableRecordResult struct {
-	TransactionId    int       `gorm:"column:id"`
 	TransactionPrice float64   `gorm:"column:transaction_price"`
 	TransactionDate  time.Time `gorm:"column:transaction_date"`
 	ClientFullName   string    `gorm:"column:client_full_name"`
