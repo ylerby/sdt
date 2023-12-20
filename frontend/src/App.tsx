@@ -30,6 +30,17 @@ export const App = () => {
           />
         )}
         {path === "/reports" && <ReportsPage />}
+        {path === "/price" && (
+          <div style={{ height: "100vh", overflow: "hidden" }}>
+            <iframe
+              title="sfs"
+              src="https://real-estate-moscow-catboost.streamlit.app/?embed=true"
+              width="100%"
+              height="100%"
+              // style={{ width: "100vw", height: "100vh", overflow: "hidden" }}
+            ></iframe>
+          </div>
+        )}
         {path === "/" && (
           <Flex
             alignItems="center"
@@ -66,6 +77,16 @@ export const App = () => {
               view="action"
             >
               Отчеты
+            </Button>
+            <Button
+              onClick={() => {
+                setPath("/price");
+                window.history.pushState({}, "", "/price");
+              }}
+              size="xl"
+              view="action"
+            >
+              Оценить стоимость квартиры
             </Button>
           </Flex>
         )}

@@ -43,3 +43,24 @@
 .yc-table__table thead tr:first-of-type th:first-of-type span {
   display: none;
 }
+
+.test {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+}
+
+.column {
+  max-width: none !important;
+}
+
+.yc-table__table {
+  width: 100%;
+}
+
+.yc-button__text {
+  display: inline-block;
+  width: 100%;
+}

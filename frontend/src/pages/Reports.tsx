@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Flex, TextInput, Text, Button, Card } from "@gravity-ui/uikit";
+import { Flex, TextInput, Text, Button, Card, Table } from "@gravity-ui/uikit";
 import { ADS_COLUMNS, MAP, TRANSACTIONS_COLUMNS } from "./../constants";
 import { toaster } from "@gravity-ui/uikit/toaster-singleton";
 
@@ -17,13 +17,98 @@ const REPORTS = [
   "Количество продаж/аренды и средняя цена", // date
 ];
 
+const mapping: Record<string, string> = {
+  AveragePrice: "Средняя цена сделки",
+  TransactionNumber: "Количество транзакций",
+  NumberOfTransaction: "Количество сделок",
+  FullName: "Имя",
+  TransactionId: "Номер транзакции",
+};
+
+export const columns1 = [
+  {
+    id: "AgentFullName",
+    name: "Агент",
+  },
+  {
+    name: "Средняя цена сделки",
+    id: "AveragePrice",
+  },
+  {
+    name: "Количество транзакций",
+    id: "TransactionNumber",
+  },
+];
+
+export const columns2 = [
+  {
+    id: "NumberOfTransaction",
+    name: mapping["NumberOfTransaction"],
+    width: "50%",
+    className: "column",
+    maxWidth: "none",
+  },
+  {
+    name: "Дата",
+    id: "TransactionDate",
+    className: "column",
+    width: "50%",
+    maxWidth: "none",
+    template: (val: any) => val.TransactionDate.slice(0, 10),
+  },
+];
+
+export const columns3 = [
+  {
+    id: "AveragePrice",
+    name: mapping["AveragePrice"],
+    className: "column",
+  },
+  {
+    name: "Район",
+    id: "District",
+    className: "column",
+  },
+];
+
+export const columns4 = [
+  {
+    id: "FullName",
+    name: mapping["FullName"],
+    className: "column",
+  },
+  {
+    id: "NumberOfTransaction",
+    name: mapping["NumberOfTransaction"],
+    className: "column",
+  },
+];
+
+export const columns5 = [
+  {
+    id: "AveragePrice",
+    name: mapping["AveragePrice"],
+    className: "column",
+  },
+  {
+    id: "DealTypeName",
+    name: "Тип сделки",
+    className: "column",
+  },
+  {
+    id: "NumberOfTransaction",
+    name: mapping["NumberOfTransaction"],
+    className: "column",
+  },
+];
+
 const REPORTS_WITH_DATES = [0, 1, 2, 3, 4, 8];
 
 export const ReportsPage = (props: ReportsPageProps) => {
   const [activeItemIndex, setActiveItemIndex] = useState<number | undefined>(0);
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
-  const [fields, setFields] = useState<Record<string, string>>({});
+  const [fields, setFields] = useState<Record<string, string>[]>([]);
 
   const onGetReport = useCallback(() => {
     if (
@@ -38,9 +123,21 @@ export const ReportsPage = (props: ReportsPageProps) => {
       });
       return;
     }
+    if (
+      startDate > endDate &&
+      REPORTS_WITH_DATES.includes(activeItemIndex as number)
+    ) {
+      toaster.add({
+        name: Math.random().toString(),
+        content: "Начало интервала должно быть больше конца",
+        type: "error",
+        autoHiding: 2000,
+      });
+      return;
+    }
     switch (activeItemIndex) {
       case 0: {
-        fetch("/record/most_profitable", {
+        fetch("/record/profitable", {
           method: "POST",
           body: JSON.stringify({
             FirstDate: startDate,
@@ -50,11 +147,11 @@ export const ReportsPage = (props: ReportsPageProps) => {
           }),
         })
           .then((res) => res.json())
-          .then((res) => setFields(res.Data[0]));
+          .then((res) => setFields(res.Data));
         break;
       }
       case 1: {
-        fetch("/record/most_profitable", {
+        fetch("/record/profitable", {
           method: "POST",
           body: JSON.stringify({
             FirstDate: startDate,
@@ -64,11 +161,11 @@ export const ReportsPage = (props: ReportsPageProps) => {
           }),
         })
           .then((res) => res.json())
-          .then((res) => setFields(res.Data[0]));
+          .then((res) => setFields(res.Data));
         break;
       }
       case 2: {
-        fetch("/record/most_profitable", {
+        fetch("/record/profitable", {
           method: "POST",
           body: JSON.stringify({
             FirstDate: startDate,
@@ -78,11 +175,11 @@ export const ReportsPage = (props: ReportsPageProps) => {
           }),
         })
           .then((res) => res.json())
-          .then((res) => setFields(res.Data[0]));
+          .then((res) => setFields(res.Data));
         break;
       }
       case 3: {
-        fetch("/record/most_profitable", {
+        fetch("/record/profitable", {
           method: "POST",
           body: JSON.stringify({
             FirstDate: startDate,
@@ -92,7 +189,57 @@ export const ReportsPage = (props: ReportsPageProps) => {
           }),
         })
           .then((res) => res.json())
-          .then((res) => setFields(res.Data[0]));
+          .then((res) => setFields(res.Data));
+        break;
+      }
+      case 4: {
+        fetch("/record/agent_record", {
+          method: "POST",
+          body: JSON.stringify({
+            FirstDate: startDate,
+            SecondDate: endDate,
+            DealTypeName: MAP["DealType"][1],
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => setFields(res.Data));
+        break;
+      }
+      case 5: {
+        fetch("/record/dynamics", {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((res) => setFields(res.Data));
+        break;
+      }
+      case 6: {
+        fetch("/record/average", {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((res) => setFields(res.Data));
+        break;
+      }
+      case 7: {
+        fetch("/record/top_agents", {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((res) => setFields(res.Data));
+        break;
+      }
+      case 8: {
+        fetch("/record/sales_count", {
+          method: "POST",
+          body: JSON.stringify({
+            FirstDate: startDate,
+            SecondDate: endDate,
+            DealTypeName: MAP["DealType"][1],
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => setFields(res.Data));
         break;
       }
     }
@@ -108,6 +255,9 @@ export const ReportsPage = (props: ReportsPageProps) => {
     }
     if (transaction) {
       return transaction.name;
+    }
+    if (mapping[key]) {
+      return mapping[key];
     }
     return key;
   };
@@ -126,6 +276,7 @@ export const ReportsPage = (props: ReportsPageProps) => {
             {REPORTS.map((report) => (
               <Button key={report} className={`ReportsPage__listItem`}>
                 <div
+                  style={{ width: "100%" }}
                   data-report={report}
                   onClick={(event: React.MouseEvent<HTMLDivElement>) => {
                     const target = event.target as HTMLDivElement;
@@ -133,7 +284,7 @@ export const ReportsPage = (props: ReportsPageProps) => {
                     const index = REPORTS.findIndex((item) => item === report);
 
                     if (index !== -1) {
-                      setFields({});
+                      setFields([]);
                       setActiveItemIndex(index);
                     }
                   }}
@@ -150,7 +301,7 @@ export const ReportsPage = (props: ReportsPageProps) => {
           direction="column"
           gap={3}
           alignItems="center"
-          style={{ padding: "0 150px", flex: 1 }}
+          style={{ padding: "0 150px", flex: 1, width: "800px" }}
         >
           <Text variant="header-1">{REPORTS[activeItemIndex]}</Text>
           <Flex gap={1} justifyContent="flex-end" style={{ width: "100%" }}>
@@ -176,19 +327,63 @@ export const ReportsPage = (props: ReportsPageProps) => {
               Выгрузить
             </Button>
           </Flex>
-          {Object.entries(fields).map(([key, value]) => (
-            <Flex
-              justifyContent="center"
-              alignItems="center"
-              key={key}
-              style={{ alignSelf: "flex-start", width: "100%" }}
-            >
-              <div style={{ flex: 1 }}>
-                <Text variant="subheader-3">{getTranslation(key)}</Text>
-              </div>
-              <Text style={{ flex: 1, textAlign: "end" }}>{value}</Text>
-            </Flex>
-          ))}
+          {Boolean(fields.length) && activeItemIndex === 4 && (
+            <Table className="test" columns={columns1} data={fields} />
+          )}
+          {Boolean(fields.length) && activeItemIndex === 5 && (
+            <Table
+              className="test"
+              columns={columns2}
+              data={fields}
+              getRowClassNames={() => ["row"]}
+            />
+          )}
+          {Boolean(fields.length) && activeItemIndex === 6 && (
+            <Table
+              className="test"
+              columns={columns3}
+              data={fields}
+              getRowClassNames={() => ["row"]}
+            />
+          )}
+          {Boolean(fields.length) && activeItemIndex === 7 && (
+            <Table
+              className="test"
+              columns={columns4}
+              data={fields}
+              getRowClassNames={() => ["row"]}
+            />
+          )}
+          {Boolean(fields.length) && activeItemIndex === 8 && (
+            <Table
+              className="test"
+              columns={columns5}
+              data={fields}
+              getRowClassNames={() => ["row"]}
+            />
+          )}
+          {![4, 5, 6, 7, 8].includes(activeItemIndex) &&
+            fields.map((item) => (
+              <>
+                {Object.entries(item).map(([key, value]) => (
+                  <>
+                    <Flex
+                      justifyContent="center"
+                      alignItems="center"
+                      key={key}
+                      style={{ alignSelf: "flex-start", width: "100%" }}
+                    >
+                      <div style={{ flex: 1 }}>
+                        <Text variant="subheader-3">{getTranslation(key)}</Text>
+                      </div>
+                      <Text style={{ flex: 1, textAlign: "end" }}>
+                        {key === "TransactionDate" ? value.slice(0, 10) : value}
+                      </Text>
+                    </Flex>
+                  </>
+                ))}
+              </>
+            ))}
         </Flex>
       )}
     </Flex>

@@ -40,4 +40,4 @@ export interface Draft {
   id: string;
 }
 
-export type Path = "/reports" | "/admin" | "/client" | "/";
+export type Path = "/reports" | "/admin" | "/client" | "/price" | "/";
